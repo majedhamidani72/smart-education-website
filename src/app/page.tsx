@@ -15,36 +15,55 @@ export default async function Home() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-      <div className="mb-8 rounded-2xl bg-gray-900 px-6 py-10 text-center">
-        <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
-          پایه‌ات رو انتخاب کن
+    <div>
+      {/* هدر با الگوی تزئینی — دقیقاً طبق طراحی همیار */}
+      <div className="pattern-header border-b border-gray-100 px-4 py-16 text-center">
+        <h1 className="mx-auto mb-3 max-w-lg text-2xl font-bold text-gray-900 sm:text-3xl">
+          یادگیری آسان، در هر زمان و هر مکان
         </h1>
-        <p className="text-sm text-gray-300 sm:text-base">
-          تدریس، گام‌به‌گام و آزمون آنلاین، مرتب‌شده برای هر پایه
+        <p className="mx-auto mb-6 max-w-md text-sm text-gray-500 sm:text-base">
+          پایه تحصیلی خود را انتخاب کنید و به دنیایی از محتوای آموزشی با
+          کیفیت دسترسی پیدا کنید.
         </p>
+        <a
+          href="#grades"
+          className="inline-block rounded-full bg-blue-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800"
+        >
+          شروع یادگیری
+        </a>
       </div>
 
-      {backendOffline ? (
-        <div className="rounded-xl bg-red-50 p-4 text-center text-sm text-red-700">
-          اتصال به سرور برقرار نشد. مطمئن شو بک‌اند لاراول با{' '}
-          <code className="rounded bg-white px-1.5 py-0.5">
-            php artisan serve
-          </code>{' '}
-          روشن است.
+      <div id="grades" className="mx-auto max-w-4xl px-4 py-10">
+        <div className="mb-8 text-center">
+          <h2 className="mb-2 text-xl font-bold text-gray-900">
+            انتخاب پایه تحصیلی
+          </h2>
+          <p className="text-sm text-gray-500">
+            برای دسترسی به محتوای آموزشی، پایه خود را انتخاب کنید.
+          </p>
         </div>
-      ) : grades.length === 0 ? (
-        <div className="rounded-xl bg-gray-50 p-4 text-center text-sm text-gray-500">
-          هنوز هیچ پایه‌ای ثبت نشده است.
-        </div>
-      ) : (
-        <GradeGrid grades={grades} />
-      )}
 
-      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <FeatureCard icon="🎬" text="۳ ویدئوی اول هر کتاب رایگان" />
-        <FeatureCard icon="📱" text="فقط با شماره موبایل، بدون رمز عبور" />
-        <FeatureCard icon="🔒" text="پرداخت امن با درگاه بانکی" />
+        {backendOffline ? (
+          <div className="rounded-xl bg-red-50 p-4 text-center text-sm text-red-700">
+            اتصال به سرور برقرار نشد. مطمئن شو بک‌اند لاراول با{' '}
+            <code className="rounded bg-white px-1.5 py-0.5">
+              php artisan serve
+            </code>{' '}
+            روشن است.
+          </div>
+        ) : grades.length === 0 ? (
+          <div className="rounded-xl bg-gray-50 p-4 text-center text-sm text-gray-500">
+            هنوز هیچ پایه‌ای ثبت نشده است.
+          </div>
+        ) : (
+          <GradeGrid grades={grades} />
+        )}
+
+        <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <FeatureCard icon="🎬" text="۳ ویدئوی اول هر کتاب رایگان" />
+          <FeatureCard icon="📱" text="فقط با شماره موبایل، بدون رمز عبور" />
+          <FeatureCard icon="🔒" text="پرداخت امن با درگاه بانکی" />
+        </div>
       </div>
     </div>
   );

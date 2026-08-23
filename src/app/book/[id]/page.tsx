@@ -46,20 +46,28 @@ export default async function BookPage({
 
   // چند معلم — دانش‌آموز باید یکی را انتخاب کند.
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <BackLink href={grade_id ? `/grade/${grade_id}` : '/'}>بازگشت</BackLink>
+    <div>
+      <div className="pattern-header border-b border-gray-100 px-4 py-10 text-center">
+        <p className="mb-2 inline-block rounded-full bg-gray-900 px-4 py-1 text-xs text-white">
+          {book.title}
+        </p>
+        <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+          معلم‌ات رو انتخاب کن
+        </h1>
+      </div>
 
-      <h1 className="mb-1 text-xl font-bold text-gray-900">{book.title}</h1>
-      <p className="mb-6 text-sm text-gray-500">معلم‌ات رو انتخاب کن</p>
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <BackLink href={grade_id ? `/grade/${grade_id}` : '/'}>بازگشت</BackLink>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {teachers.map((teacher) => (
-          <TeacherCard
-            key={teacher.id}
-            teacher={teacher}
-            href={`/book/${bookId}?teacher_id=${teacher.id}`}
-          />
-        ))}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {teachers.map((teacher) => (
+            <TeacherCard
+              key={teacher.id}
+              teacher={teacher}
+              href={`/book/${bookId}?teacher_id=${teacher.id}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -75,11 +83,16 @@ async function BookContentSection({
   const items = await getBookContent(book.id);
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="mb-1 text-xl font-bold text-gray-900">{book.title}</h1>
-      <p className="mb-6 text-sm text-gray-400">معلم: شناسه {teacherId}</p>
+    <div>
+      <div className="pattern-header border-b border-gray-100 px-4 py-10 text-center">
+        <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+          {book.title}
+        </h1>
+      </div>
 
-      <BookContent items={items} />
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <BookContent items={items} />
+      </div>
     </div>
   );
 }

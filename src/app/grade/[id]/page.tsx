@@ -17,18 +17,25 @@ export default async function GradePage({
   const isElementary = grade.grade_number <= 6;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <BackLink href="/">بازگشت به لیست پایه‌ها</BackLink>
+    <div>
+      <div className="pattern-header border-b border-gray-100 px-4 py-10 text-center">
+        <p className="mb-2 inline-block rounded-full bg-gray-900 px-4 py-1 text-xs text-white">
+          پایه {grade.title}
+        </p>
+        <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+          {isElementary ? 'معلم‌ات رو انتخاب کن' : 'درست رو انتخاب کن'}
+        </h1>
+      </div>
 
-      <h1 className="mb-6 text-xl font-bold text-gray-900">
-        پایه {grade.title}
-      </h1>
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <BackLink href="/">بازگشت به لیست پایه‌ها</BackLink>
 
-      {isElementary ? (
-        <ElementaryGradeContent gradeId={gradeId} />
-      ) : (
-        <SecondaryGradeContent gradeId={gradeId} />
-      )}
+        {isElementary ? (
+          <ElementaryGradeContent gradeId={gradeId} />
+        ) : (
+          <SecondaryGradeContent gradeId={gradeId} />
+        )}
+      </div>
     </div>
   );
 }
@@ -41,17 +48,14 @@ async function ElementaryGradeContent({ gradeId }: { gradeId: number }) {
   }
 
   return (
-    <div>
-      <p className="mb-4 text-sm text-gray-500">معلم‌ات رو انتخاب کن</p>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {teachers.map((teacher) => (
-          <TeacherCard
-            key={teacher.id}
-            teacher={teacher}
-            href={`/grade/${gradeId}/teacher/${teacher.id}`}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {teachers.map((teacher) => (
+        <TeacherCard
+          key={teacher.id}
+          teacher={teacher}
+          href={`/grade/${gradeId}/teacher/${teacher.id}`}
+        />
+      ))}
     </div>
   );
 }
@@ -64,13 +68,10 @@ async function SecondaryGradeContent({ gradeId }: { gradeId: number }) {
   }
 
   return (
-    <div>
-      <p className="mb-4 text-sm text-gray-500">درست رو انتخاب کن</p>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {books.map((book) => (
-          <BookCard key={book.id} book={book} href={`/book/${book.id}?grade_id=${gradeId}`} />
-        ))}
-      </div>
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {books.map((book) => (
+        <BookCard key={book.id} book={book} href={`/book/${book.id}?grade_id=${gradeId}`} />
+      ))}
     </div>
   );
 }

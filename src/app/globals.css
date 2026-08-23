@@ -15,3 +15,14 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* الگوی تزئینی هدر — شبیه پس‌زمینه‌ی هدرهای سایت همیار */
+.pattern-header {
+  background-color: #f8f9fb;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(0, 0, 0, 0.06) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+}
