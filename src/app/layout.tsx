@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Vazirmatn } from 'next/font/google';
 import './globals.css';
+import SiteHeader from '@/components/SiteHeader';
 
 const vazirmatn = Vazirmatn({
   subsets: ['arabic'],
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={`${vazirmatn.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white font-sans">
+        <SiteHeader />
         {children}
       </body>
     </html>
