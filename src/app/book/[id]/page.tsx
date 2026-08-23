@@ -1,7 +1,9 @@
 import { getBook } from '@/lib/books';
 import { getTeachersForBook } from '@/lib/teachers';
+import { getBookContent } from '@/lib/content';
 import BackLink from '@/components/BackLink';
 import TeacherCard from '@/components/TeacherCard';
+import BookContent from '@/components/BookContent';
 
 export default async function BookPage({
   params,
@@ -19,7 +21,7 @@ export default async function BookPage({
   // اگر از قبل (مسیر ابتدایی، از داخل صفحه‌ی یک معلم مشخص) معلم
   // مشخص است، مستقیم وارد محتوای کتاب می‌شویم.
   if (teacher_id) {
-    return <BookContent book={book} teacherId={Number(teacher_id)} />;
+    return <BookContentSection book={book} teacherId={Number(teacher_id)} />;
   }
 
   // در غیر این صورت (مسیر متوسطه)، معلم‌های این کتاب را می‌گیریم:
@@ -27,7 +29,7 @@ export default async function BookPage({
 
   // فقط یک معلم؟ نیازی به انتخاب نیست — مستقیم وارد محتوا می‌شویم.
   if (teachers.length === 1) {
-    return <BookContent book={book} teacherId={teachers[0].id} />;
+    return <BookContentSection book={book} teacherId={teachers[0].id} />;
   }
 
   // بدون هیچ معلمی — یعنی هنوز کسی این کتاب را تدریس نمی‌کند.
@@ -63,23 +65,21 @@ export default async function BookPage({
   );
 }
 
-function BookContent({
+async function BookContentSection({
   book,
   teacherId,
 }: {
   book: import('@/types').Book;
   teacherId: number;
 }) {
-  // این بخش (نمایش تدریس/گام‌به‌گام/نمونه‌سوال یک کتاب برای یک
-  // معلم مشخص) قدم بعدی توسعه است — فعلاً فقط تأیید می‌کند که
-  // مسیر تا اینجا درست رسیده.
+  const items = await getBookContent(book.id);
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="mb-2 text-xl font-bold text-gray-900">{book.title}</h1>
-      <p className="text-sm text-gray-500">
-        محتوای این کتاب (شناسه‌ی معلم: {teacherId}) به‌زودی اینجا نمایش داده
-        می‌شود.
-      </p>
+      <h1 className="mb-1 text-xl font-bold text-gray-900">{book.title}</h1>
+      <p className="mb-6 text-sm text-gray-400">معلم: شناسه {teacherId}</p>
+
+      <BookContent items={items} />
     </div>
   );
 }

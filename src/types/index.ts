@@ -21,3 +21,47 @@ export interface Book {
   sort_order: number;
   is_active: boolean;
 }
+
+export interface ContentType {
+  id: number;
+  title: string;
+  slug: string;
+}
+
+export interface Video {
+  video_url: string | null;
+  duration: number | null;
+  thumbnail_url: string | null;
+}
+
+export interface PdfFile {
+  file: string | null;
+}
+
+export interface StepByStepPage {
+  id: number;
+  page_number: number;
+  image: string | null;
+}
+
+export interface StepByStep {
+  id: number;
+  pages: StepByStepPage[];
+}
+
+export interface ContentItem {
+  id: number;
+  section_id: number | null;
+  content_type_id: number;
+  title: string;
+  slug: string;
+  description: string | null;
+  thumbnail: string | null;
+  is_free: boolean;
+  has_access: boolean;
+  sort_order: number;
+  content_type: ContentType | null;
+  video: Video | null;
+  pdf_file: PdfFile | null;
+  step_by_step: StepByStep | null;
+}
