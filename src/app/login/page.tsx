@@ -95,7 +95,7 @@ function LoginForm() {
           <button
             onClick={handleSendOtp}
             disabled={loading}
-            className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white disabled:opacity-50"
+            className="w-full rounded-lg bg-violet-700 py-3 font-medium text-white disabled:opacity-50"
           >
             {loading ? 'در حال ارسال...' : 'دریافت کد'}
           </button>
@@ -116,7 +116,7 @@ function LoginForm() {
           <button
             onClick={handleVerifyOtp}
             disabled={loading}
-            className="w-full rounded-lg bg-gray-900 py-3 font-medium text-white disabled:opacity-50"
+            className="w-full rounded-lg bg-violet-700 py-3 font-medium text-white disabled:opacity-50"
           >
             {loading ? 'در حال بررسی...' : 'ورود'}
           </button>

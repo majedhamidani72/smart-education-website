@@ -27,7 +27,7 @@ export default async function Home() {
         </p>
         <a
           href="#grades"
-          className="inline-block rounded-full bg-blue-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800"
+          className="inline-block rounded-full bg-violet-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-violet-800"
         >
           شروع یادگیری
         </a>

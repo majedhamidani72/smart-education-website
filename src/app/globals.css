@@ -16,12 +16,13 @@ body {
   color: var(--foreground);
 }
 
-/* الگوی تزئینی هدر — شبیه پس‌زمینه‌ی هدرهای سایت همیار */
+/* الگوی تزئینی هدر — نسخه‌ی خودمان، نه رنگ آبی/خاکستری معمول؛
+   یک تن بنفش گرم که با پالت اصلی سایت هماهنگ است. */
 .pattern-header {
-  background-color: #f8f9fb;
+  background-color: #faf8fd;
   background-image: radial-gradient(
     circle at 1px 1px,
-    rgba(0, 0, 0, 0.06) 1px,
+    rgba(109, 40, 217, 0.12) 1px,
     transparent 0
   );
   background-size: 20px 20px;

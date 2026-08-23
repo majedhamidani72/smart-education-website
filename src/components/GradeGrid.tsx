@@ -8,23 +8,23 @@ interface Props {
 }
 
 /**
- * یک آیکون رنگی مجزا برای هر پایه — دقیقاً همان الگویی که سایت
- * همیار برای پایه‌ها استفاده می‌کند؛ نه شماره‌ی خشک، یک نماد
- * دوستانه و به‌یادماندنی.
+ * برای هر پایه، یک نماد و یک رنگ اختصاصی — طرحی خودمان (نه کپی
+ * مستقیم سایت‌های دیگر): هر پایه یک بج گرد رنگی دارد که نماد
+ * داخلش را برجسته می‌کند، به‌جای یک آیکون تخت روی زمینه‌ی سفید.
  */
-const GRADE_ICONS: Record<number, string> = {
-  1: '📚',
-  2: '✏️',
-  3: '🎨',
-  4: '📐',
-  5: '🌍',
-  6: '🧪',
-  7: '🎓',
-  8: '💡',
-  9: '🧬',
-  10: '➗',
-  11: '🔬',
-  12: '📖',
+const GRADE_STYLE: Record<number, { icon: string; bg: string }> = {
+  1: { icon: '🌱', bg: 'bg-emerald-100' },
+  2: { icon: '🖍️', bg: 'bg-rose-100' },
+  3: { icon: '🎨', bg: 'bg-amber-100' },
+  4: { icon: '📐', bg: 'bg-sky-100' },
+  5: { icon: '🌍', bg: 'bg-teal-100' },
+  6: { icon: '🧪', bg: 'bg-violet-100' },
+  7: { icon: '🚀', bg: 'bg-indigo-100' },
+  8: { icon: '💡', bg: 'bg-yellow-100' },
+  9: { icon: '🧬', bg: 'bg-fuchsia-100' },
+  10: { icon: '📊', bg: 'bg-cyan-100' },
+  11: { icon: '🔭', bg: 'bg-blue-100' },
+  12: { icon: '🏆', bg: 'bg-orange-100' },
 };
 
 /**
@@ -63,20 +63,29 @@ function GradeSection({
     <div>
       <p className="mb-3 text-sm text-gray-400">{title}</p>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-        {grades.map((grade) => (
-          <Link
-            key={grade.id}
-            href={`/grade/${grade.id}`}
-            className="group flex flex-col items-center gap-2 rounded-xl border border-gray-100 bg-white py-5 text-center transition hover:border-gray-200 hover:shadow-md"
-          >
-            <span className="text-3xl transition group-hover:scale-110">
-              {GRADE_ICONS[grade.grade_number] ?? '📘'}
-            </span>
-            <span className="text-sm font-medium text-gray-700">
-              {grade.title}
-            </span>
-          </Link>
-        ))}
+        {grades.map((grade) => {
+          const style = GRADE_STYLE[grade.grade_number] ?? {
+            icon: '📘',
+            bg: 'bg-gray-100',
+          };
+
+          return (
+            <Link
+              key={grade.id}
+              href={`/grade/${grade.id}`}
+              className="group flex flex-col items-center gap-2 rounded-xl border border-gray-100 bg-white py-5 text-center transition hover:border-gray-200 hover:shadow-md"
+            >
+              <span
+                className={`flex h-12 w-12 items-center justify-center rounded-full text-xl transition group-hover:scale-110 ${style.bg}`}
+              >
+                {style.icon}
+              </span>
+              <span className="text-sm font-medium text-gray-700">
+                {grade.title}
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

@@ -21,29 +21,35 @@ export default async function TeacherBooksPage({
   const teacher = teachers.find((t) => t.id === teacherIdNum);
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <BackLink href={`/grade/${gradeId}`}>بازگشت به لیست معلم‌ها</BackLink>
+    <div>
+      <div className="pattern-header border-b border-gray-100 px-4 py-10 text-center">
+        <p className="mb-2 inline-block rounded-full bg-violet-700 px-4 py-1 text-xs text-white">
+          پایه {grade.title}
+        </p>
+        <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+          {teacher?.name ?? 'معلم'}
+        </h1>
+      </div>
 
-      <h1 className="mb-1 text-xl font-bold text-gray-900">
-        {teacher?.name ?? 'معلم'}
-      </h1>
-      <p className="mb-6 text-sm text-gray-500">پایه {grade.title}</p>
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <BackLink href={`/grade/${gradeId}`}>بازگشت به لیست معلم‌ها</BackLink>
 
-      {books.length === 0 ? (
-        <div className="rounded-xl bg-gray-50 p-6 text-center text-sm text-gray-500">
-          هنوز کتابی برای این معلم ثبت نشده است.
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {books.map((book) => (
-            <BookCard
-              key={book.id}
-              book={book}
-              href={`/book/${book.id}?teacher_id=${teacherIdNum}`}
-            />
-          ))}
-        </div>
-      )}
+        {books.length === 0 ? (
+          <div className="rounded-xl bg-gray-50 p-6 text-center text-sm text-gray-500">
+            هنوز کتابی برای این معلم ثبت نشده است.
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {books.map((book) => (
+              <BookCard
+                key={book.id}
+                book={book}
+                href={`/book/${book.id}?teacher_id=${teacherIdNum}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

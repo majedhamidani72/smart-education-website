@@ -48,7 +48,7 @@ export default async function BookPage({
   return (
     <div>
       <div className="pattern-header border-b border-gray-100 px-4 py-10 text-center">
-        <p className="mb-2 inline-block rounded-full bg-gray-900 px-4 py-1 text-xs text-white">
+        <p className="mb-2 inline-block rounded-full bg-violet-700 px-4 py-1 text-xs text-white">
           {book.title}
         </p>
         <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
