@@ -15,12 +15,12 @@ export default async function Home() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="mb-10 text-center">
-        <h1 className="mb-2 text-2xl font-bold text-gray-900">
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mb-8 rounded-2xl bg-gray-900 px-6 py-10 text-center">
+        <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl">
           پایه‌ات رو انتخاب کن
         </h1>
-        <p className="text-gray-500">
+        <p className="text-sm text-gray-300 sm:text-base">
           تدریس، گام‌به‌گام و آزمون آنلاین، مرتب‌شده برای هر پایه
         </p>
       </div>
@@ -41,18 +41,19 @@ export default async function Home() {
         <GradeGrid grades={grades} />
       )}
 
-      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <FeatureCard text="۳ ویدئوی اول هر کتاب رایگان" />
-        <FeatureCard text="فقط با شماره موبایل، بدون رمز عبور" />
-        <FeatureCard text="پرداخت امن با درگاه بانکی" />
+      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <FeatureCard icon="🎬" text="۳ ویدئوی اول هر کتاب رایگان" />
+        <FeatureCard icon="📱" text="فقط با شماره موبایل، بدون رمز عبور" />
+        <FeatureCard icon="🔒" text="پرداخت امن با درگاه بانکی" />
       </div>
     </div>
   );
 }
 
-function FeatureCard({ text }: { text: string }) {
+function FeatureCard({ icon, text }: { icon: string; text: string }) {
   return (
-    <div className="rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
+    <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-white p-4 text-sm text-gray-600">
+      <span className="text-lg">{icon}</span>
       {text}
     </div>
   );

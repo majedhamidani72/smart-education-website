@@ -12,9 +12,10 @@ export default function SiteHeader() {
   }, []);
 
   return (
-    <header className="border-b border-gray-100 px-4 py-3">
+    <header className="sticky top-0 z-10 border-b border-gray-100 bg-white/90 px-4 py-3 backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
-        <Link href="/" className="font-bold text-gray-900">
+        <Link href="/" className="flex items-center gap-2 font-bold text-gray-900">
+          <span>📚</span>
           اسمارت اجوکیشن
         </Link>
 
@@ -24,12 +25,15 @@ export default function SiteHeader() {
               clearToken();
               setLoggedIn(false);
             }}
-            className="text-sm text-gray-500"
+            className="rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:bg-gray-50"
           >
             خروج
           </button>
         ) : (
-          <Link href="/login" className="text-sm text-gray-700">
+          <Link
+            href="/login"
+            className="rounded-lg bg-gray-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-gray-800"
+          >
             ورود
           </Link>
         )}

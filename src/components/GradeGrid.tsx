@@ -23,40 +23,85 @@ export default function GradeGrid({ grades }: Props) {
     .sort((a, b) => a.grade_number - b.grade_number);
 
   return (
-    <div className="space-y-8">
-      <GradeRow title="ابتدایی" grades={elementary} basePath="/grade" colorClass="bg-teal-50 text-teal-800 hover:bg-teal-100" />
-      <GradeRow title="متوسطه" grades={secondary} basePath="/grade" colorClass="bg-purple-50 text-purple-800 hover:bg-purple-100" />
+    <div className="space-y-6">
+      <GradeSection
+        title="دوره‌ی ابتدایی"
+        subtitle="اول تا ششم — با انتخاب معلم"
+        icon="📗"
+        grades={elementary}
+        accent="teal"
+      />
+      <GradeSection
+        title="دوره‌ی متوسطه"
+        subtitle="هفتم تا دوازدهم — با انتخاب درس"
+        icon="🎓"
+        grades={secondary}
+        accent="purple"
+      />
     </div>
   );
 }
 
-function GradeRow({
+const ACCENTS = {
+  teal: {
+    section: 'bg-teal-50/60 border-teal-100',
+    badge: 'bg-teal-600 text-white',
+    card: 'bg-white border-teal-100 hover:border-teal-300 hover:shadow-md',
+    title: 'text-teal-900',
+  },
+  purple: {
+    section: 'bg-purple-50/60 border-purple-100',
+    badge: 'bg-purple-600 text-white',
+    card: 'bg-white border-purple-100 hover:border-purple-300 hover:shadow-md',
+    title: 'text-purple-900',
+  },
+} as const;
+
+function GradeSection({
   title,
+  subtitle,
+  icon,
   grades,
-  basePath,
-  colorClass,
+  accent,
 }: {
   title: string;
+  subtitle: string;
+  icon: string;
   grades: Grade[];
-  basePath: string;
-  colorClass: string;
+  accent: keyof typeof ACCENTS;
 }) {
   if (grades.length === 0) return null;
 
+  const colors = ACCENTS[accent];
+
   return (
-    <div>
-      <p className="mb-3 text-sm text-gray-400">{title}</p>
+    <section className={`rounded-2xl border p-5 ${colors.section}`}>
+      <div className="mb-4 flex items-center gap-2">
+        <span className="text-xl">{icon}</span>
+        <div>
+          <h2 className={`font-bold ${colors.title}`}>{title}</h2>
+          <p className="text-xs text-gray-500">{subtitle}</p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
         {grades.map((grade) => (
           <Link
             key={grade.id}
-            href={`${basePath}/${grade.id}`}
-            className={`rounded-xl py-4 text-center font-medium transition ${colorClass}`}
+            href={`/grade/${grade.id}`}
+            className={`group flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition ${colors.card}`}
           >
-            {grade.title}
+            <span
+              className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold transition group-hover:scale-105 ${colors.badge}`}
+            >
+              {grade.grade_number}
+            </span>
+            <span className="text-sm font-medium text-gray-800">
+              {grade.title}
+            </span>
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
