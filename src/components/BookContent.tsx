@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { ContentItem } from '@/types';
 
 interface Props {
   items: ContentItem[];
+  bookId: number;
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -16,7 +18,7 @@ const TYPE_LABELS: Record<string, string> = {
 
 const HIDDEN_TYPES = ['step_by_step'];
 
-export default function BookContent({ items }: Props) {
+export default function BookContent({ items, bookId }: Props) {
   const visibleItemsAll = items.filter(
     (i) => !HIDDEN_TYPES.includes(i.content_type?.slug ?? '')
   );
@@ -63,14 +65,14 @@ export default function BookContent({ items }: Props) {
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {visibleItems.map((item) => (
-          <ContentItemCard key={item.id} item={item} />
+          <ContentItemCard key={item.id} item={item} bookId={bookId} />
         ))}
       </div>
     </div>
   );
 }
 
-function ContentItemCard({ item }: { item: ContentItem }) {
+function ContentItemCard({ item, bookId }: { item: ContentItem; bookId: number }) {
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-4 transition hover:shadow-md">
       <div className="mb-2 flex items-center justify-between gap-3">
@@ -85,9 +87,12 @@ function ContentItemCard({ item }: { item: ContentItem }) {
       {item.has_access ? (
         <ContentPlayer item={item} />
       ) : (
-        <p className="text-sm text-gray-400">
-          برای مشاهده‌ی این محتوا، ابتدا باید این کتاب را خریداری کنی.
-        </p>
+        <Link
+          href={`/purchase?book_id=${bookId}`}
+          className="text-sm font-medium text-violet-700 underline"
+        >
+          برای مشاهده‌ی این محتوا، ابتدا این کتاب را خریداری کن ←
+        </Link>
       )}
     </div>
   );

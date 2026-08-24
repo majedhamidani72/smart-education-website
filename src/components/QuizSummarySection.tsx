@@ -11,7 +11,13 @@ import { getToken } from '@/lib/token';
  * رقبا متمایز می‌کند: شفافیت کامل در این‌که هر آزمون دقیقاً
  * برای کدام قسمت طراحی شده.
  */
-export default function QuizSummarySection({ summary }: { summary: QuizSummary }) {
+export default function QuizSummarySection({
+  summary,
+  bookId,
+}: {
+  summary: QuizSummary;
+  bookId: number;
+}) {
   const total =
     summary.section.length + summary.chapter.length + summary.book.length;
 
@@ -36,12 +42,13 @@ export default function QuizSummarySection({ summary }: { summary: QuizSummary }
           title="آزمون‌های بخش/درس"
           icon="📘"
           items={summary.section}
+          bookId={bookId}
           getSubtitle={(q) =>
             [q.chapter_title, q.section_title].filter(Boolean).join(' — ')
           }
         />
-        <QuizGroup title="آزمون‌های فصل" icon="📙" items={summary.chapter} />
-        <QuizGroup title="آزمون کل کتاب" icon="📕" items={summary.book} />
+        <QuizGroup title="آزمون‌های فصل" icon="📙" items={summary.chapter} bookId={bookId} />
+        <QuizGroup title="آزمون کل کتاب" icon="📕" items={summary.book} bookId={bookId} />
       </div>
     </div>
   );
@@ -51,11 +58,13 @@ function QuizGroup({
   title,
   icon,
   items,
+  bookId,
   getSubtitle,
 }: {
   title: string;
   icon: string;
   items: QuizSummaryItem[];
+  bookId: number;
   getSubtitle?: (item: QuizSummaryItem) => string;
 }) {
   const router = useRouter();
@@ -70,8 +79,13 @@ function QuizGroup({
       return;
     }
 
-    // وارد شده — چه دسترسی داشته باشد چه نه، صفحه‌ی خودِ آزمون
-    // تصمیم نهایی را نشان می‌دهد (شروع آزمون، یا لزوم خرید).
+    // بدون دسترسی؟ مستقیم به صفحه‌ی خرید همین کتاب — نه یک پیام
+    // ایستا. با دسترسی، مستقیم وارد خودِ آزمون می‌شویم.
+    if (!quiz.has_access) {
+      router.push(`/purchase?book_id=${bookId}`);
+      return;
+    }
+
     router.push(`/quiz/${quiz.id}`);
   }
 

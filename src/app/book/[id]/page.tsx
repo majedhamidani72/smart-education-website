@@ -96,8 +96,8 @@ async function BookContentSection({
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <QuizSummarySection summary={quizSummary} />
-        <BookContent items={items} />
+        <QuizSummarySection summary={quizSummary} bookId={book.id} />
+        <BookContent items={items} bookId={book.id} />
       </div>
     </div>
   );
