@@ -37,6 +37,12 @@ export async function apiFetch<T>(
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
+    // Next.js به‌طور پیش‌فرض نتیجه‌ی fetch را کش می‌کند — یعنی
+    // حتی اگر داده‌ی بک‌اند عوض شود (مثلاً سیدر جدید اجرا شود)،
+    // سایت همان نسخه‌ی قدیمی را نشان می‌داد. چون داده‌ی این پروژه
+    // دائم در حال تغییر است (پنل ادمین، سیدرها، خریدها)، همیشه
+    // تازه‌ترین نسخه خوانده می‌شود.
+    cache: 'no-store',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

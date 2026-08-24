@@ -2,7 +2,9 @@ import { getGrades } from '@/lib/grades';
 import GradeGrid from '@/components/GradeGrid';
 import { Grade } from '@/types';
 
-export const revalidate = 300;
+// چون apiFetch دیگر خودش cache: 'no-store' دارد، دیگر نیازی به
+// این export نیست — قبلاً این خط باعث می‌شد صفحه‌ی اصلی تا ۵
+// دقیقه، حتی بعد از تغییر داده‌ی بک‌اند، نسخه‌ی قدیمی نشان دهد.
 
 export default async function Home() {
   let grades: Grade[] = [];
