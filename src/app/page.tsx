@@ -1,10 +1,7 @@
 import { getGrades } from '@/lib/grades';
 import GradeGrid from '@/components/GradeGrid';
 import { Grade } from '@/types';
-
-// چون apiFetch دیگر خودش cache: 'no-store' دارد، دیگر نیازی به
-// این export نیست — قبلاً این خط باعث می‌شد صفحه‌ی اصلی تا ۵
-// دقیقه، حتی بعد از تغییر داده‌ی بک‌اند، نسخه‌ی قدیمی نشان دهد.
+import { Video, ClipboardCheck, ShieldCheck } from 'lucide-react';
 
 export default async function Home() {
   let grades: Grade[] = [];
@@ -18,33 +15,61 @@ export default async function Home() {
 
   return (
     <div>
-      {/* هدر — پس‌زمینه‌ی بنفش تیره‌ی خودمان (نه الگوی کم‌رنگ قبلی
-          که متن رویش به‌سختی دیده می‌شد) */}
-      <div className="bg-violet-900 px-4 py-8 text-center">
-        <h1 className="mx-auto mb-2 max-w-lg text-2xl font-bold text-white sm:text-3xl">
-          یادگیری آسان، در هر زمان و هر مکان
+      {/* Hero — رنگ ملایم و روشن (نه بنفش تیره‌ی قبلی)، متن تیره
+          برای خوانایی کامل */}
+      <div className="bg-orange-50/70 px-4 py-12 text-center">
+        <h1 className="mx-auto mb-3 max-w-xl text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          درس بخوان، تمرین کن، خودت را بسنج
         </h1>
-        <p className="mx-auto mb-4 max-w-md text-base text-violet-100">
-          پایه تحصیلی خود را انتخاب کنید و به دنیایی از محتوای آموزشی با
-          کیفیت دسترسی پیدا کنید.
+        <p className="mx-auto mb-7 max-w-md text-base leading-7 text-gray-600">
+          محتوای آموزشی مرحله‌به‌مرحله و آزمون آنلاین، مرتب‌شده برای پایه‌ی
+          تحصیلی خودت.
         </p>
-        <a
-          href="#grades"
-          className="inline-block rounded-full bg-white px-7 py-3 text-base font-bold text-violet-900 transition hover:bg-violet-50"
-        >
-          شروع یادگیری
-        </a>
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href="#grades"
+            className="inline-block rounded-full bg-violet-700 px-7 py-3 text-base font-bold text-white transition hover:bg-violet-800"
+          >
+            شروع یادگیری
+          </a>
+          <a
+            href="#grades"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-violet-700 px-7 py-3 text-base font-bold text-violet-700 transition hover:bg-violet-50"
+          >
+            <ClipboardCheck size={20} />
+            آزمون آنلاین
+          </a>
+        </div>
       </div>
 
-      {/* بخش پایین — پس‌زمینه‌ی روشن و متفاوت از هدر */}
-      <div id="grades" className="bg-violet-50/40 px-4 py-8">
+      {/* ویژگی‌های واقعی سیستم — فقط چیزهایی که واقعاً پیاده‌سازی
+          شده‌اند (نه آمار ساختگی) */}
+      <div className="border-b border-gray-100 bg-white px-4 py-8">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+          <FeatureCard
+            icon={<Video size={22} />}
+            text="۳ ویدئوی اول هر کتاب رایگان"
+          />
+          <FeatureCard
+            icon={<ClipboardCheck size={22} />}
+            text="آزمون آنلاین با نتیجه‌ی فوری"
+          />
+          <FeatureCard
+            icon={<ShieldCheck size={22} />}
+            text="پرداخت امن با درگاه بانکی"
+          />
+        </div>
+      </div>
+
+      {/* بخش انتخاب پایه — پس‌زمینه‌ی ظریفاً متفاوت از Hero */}
+      <div id="grades" className="bg-emerald-50/40 px-4 py-10">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8 text-center">
-            <h2 className="mb-2 text-4xl font-extrabold text-gray-900 sm:text-5xl">
-              انتخاب پایه تحصیلی
+            <h2 className="mb-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              پایه تحصیلی خودت را انتخاب کن
             </h2>
             <p className="text-base text-gray-600">
-              برای دسترسی به محتوای آموزشی، پایه خود را انتخاب کنید.
+              برای مشاهده‌ی درس‌ها، ابتدا پایه تحصیلی خود را انتخاب کن.
             </p>
           </div>
 
@@ -63,22 +88,24 @@ export default async function Home() {
           ) : (
             <GradeGrid grades={grades} />
           )}
-
-          <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <FeatureCard icon="🎬" text="۳ ویدئوی اول هر کتاب رایگان" />
-            <FeatureCard icon="📱" text="فقط با شماره موبایل، بدون رمز عبور" />
-            <FeatureCard icon="🔒" text="پرداخت امن با درگاه بانکی" />
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function FeatureCard({ icon, text }: { icon: string; text: string }) {
+function FeatureCard({
+  icon,
+  text,
+}: {
+  icon: React.ReactNode;
+  text: string;
+}) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-white p-5 text-base text-gray-700">
-      <span className="text-2xl">{icon}</span>
+    <div className="flex items-center gap-3 rounded-xl border border-gray-100 p-4 text-base text-gray-700">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-violet-50 text-violet-700">
+        {icon}
+      </span>
       {text}
     </div>
   );
