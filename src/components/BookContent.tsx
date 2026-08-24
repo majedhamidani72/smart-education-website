@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { ContentItem } from '@/types';
 
 interface Props {
@@ -19,6 +20,9 @@ const TYPE_LABELS: Record<string, string> = {
 const HIDDEN_TYPES = ['step_by_step'];
 
 export default function BookContent({ items, bookId }: Props) {
+  const searchParams = useSearchParams();
+  const requestedType = searchParams.get('type');
+
   const visibleItemsAll = items.filter(
     (i) => !HIDDEN_TYPES.includes(i.content_type?.slug ?? '')
   );
@@ -29,8 +33,12 @@ export default function BookContent({ items, bookId }: Props) {
     new Set(visibleItemsAll.map((i) => i.content_type?.slug).filter(Boolean))
   ) as string[];
 
+  // اگر از لیست آکاردئون کتاب‌ها با یک نوع مشخص (مثلاً تدریس)
+  // اینجا رسیده باشیم، همان تب از اول باز است.
   const [activeType, setActiveType] = useState<string | null>(
-    typesPresent[0] ?? null
+    requestedType && typesPresent.includes(requestedType)
+      ? requestedType
+      : (typesPresent[0] ?? null)
   );
 
   if (visibleItemsAll.length === 0) {

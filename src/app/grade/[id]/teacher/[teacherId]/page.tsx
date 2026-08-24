@@ -1,7 +1,7 @@
 import { getGrade } from '@/lib/grades';
 import { getTeacherBooks, getTeachersForGrade } from '@/lib/teachers';
 import BackLink from '@/components/BackLink';
-import BookCard from '@/components/BookCard';
+import BookAccordion from '@/components/BookAccordion';
 
 export default async function TeacherBooksPage({
   params,
@@ -39,15 +39,7 @@ export default async function TeacherBooksPage({
             هنوز کتابی برای این معلم ثبت نشده است.
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {books.map((book) => (
-              <BookCard
-                key={book.id}
-                book={book}
-                href={`/book/${book.id}?teacher_id=${teacherIdNum}`}
-              />
-            ))}
-          </div>
+          <BookAccordion books={books} extraQuery={`&teacher_id=${teacherIdNum}`} />
         )}
       </div>
     </div>

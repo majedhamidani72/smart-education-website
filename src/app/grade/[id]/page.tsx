@@ -3,7 +3,7 @@ import { getTeachersForGrade } from '@/lib/teachers';
 import { getBooksForGrade } from '@/lib/books';
 import BackLink from '@/components/BackLink';
 import TeacherCard from '@/components/TeacherCard';
-import BookCard from '@/components/BookCard';
+import BookAccordion from '@/components/BookAccordion';
 
 export default async function GradePage({
   params,
@@ -67,13 +67,7 @@ async function SecondaryGradeContent({ gradeId }: { gradeId: number }) {
     return <EmptyState text="هنوز کتابی برای این پایه ثبت نشده است." />;
   }
 
-  return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-      {books.map((book) => (
-        <BookCard key={book.id} book={book} href={`/book/${book.id}?grade_id=${gradeId}`} />
-      ))}
-    </div>
-  );
+  return <BookAccordion books={books} extraQuery={`&grade_id=${gradeId}`} />;
 }
 
 function EmptyState({ text }: { text: string }) {
