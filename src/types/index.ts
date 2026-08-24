@@ -73,6 +73,7 @@ export interface QuizSummaryItem {
   chapter_title?: string | null;
   question_count: number;
   is_free: boolean;
+  has_access: boolean;
 }
 
 export interface QuizSummary {

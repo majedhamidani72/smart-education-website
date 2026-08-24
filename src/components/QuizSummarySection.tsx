@@ -1,4 +1,8 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { QuizSummary, QuizSummaryItem } from '@/types';
+import { getToken } from '@/lib/token';
 
 /**
  * سازماندهی آزمون‌های آنلاین به تفکیک دقیق سطح — بخش، فصل، یا
@@ -54,7 +58,22 @@ function QuizGroup({
   items: QuizSummaryItem[];
   getSubtitle?: (item: QuizSummaryItem) => string;
 }) {
+  const router = useRouter();
+
   if (items.length === 0) return null;
+
+  function handleClick(quiz: QuizSummaryItem) {
+    // اگر وارد نشده، اول باید وارد شود — بعد از ورود دوباره به
+    // همین آزمون برمی‌گردد.
+    if (!getToken()) {
+      router.push(`/login?redirect=/quiz/${quiz.id}`);
+      return;
+    }
+
+    // وارد شده — چه دسترسی داشته باشد چه نه، صفحه‌ی خودِ آزمون
+    // تصمیم نهایی را نشان می‌دهد (شروع آزمون، یا لزوم خرید).
+    router.push(`/quiz/${quiz.id}`);
+  }
 
   return (
     <div>
@@ -63,9 +82,10 @@ function QuizGroup({
       </p>
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {items.map((quiz) => (
-          <div
+          <button
             key={quiz.id}
-            className="flex items-center justify-between gap-3 rounded-xl border border-gray-100 bg-white p-3 transition hover:border-violet-200 hover:shadow-sm"
+            onClick={() => handleClick(quiz)}
+            className="flex items-center justify-between gap-3 rounded-xl border border-gray-100 bg-white p-3 text-right transition hover:border-violet-200 hover:shadow-sm"
           >
             <div>
               <p className="text-sm font-medium text-gray-800">{quiz.title}</p>
@@ -76,12 +96,12 @@ function QuizGroup({
                 {quiz.question_count} سوال
               </p>
             </div>
-            {!quiz.is_free && (
+            {!quiz.has_access && (
               <span className="whitespace-nowrap rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
                 🔒 پولی
               </span>
             )}
-          </div>
+          </button>
         ))}
       </div>
     </div>
