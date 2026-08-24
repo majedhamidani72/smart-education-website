@@ -65,3 +65,18 @@ export interface ContentItem {
   pdf_file: PdfFile | null;
   step_by_step: StepByStep | null;
 }
+
+export interface QuizSummaryItem {
+  id: number;
+  title: string;
+  section_title?: string | null;
+  chapter_title?: string | null;
+  question_count: number;
+  is_free: boolean;
+}
+
+export interface QuizSummary {
+  section: QuizSummaryItem[];
+  chapter: QuizSummaryItem[];
+  book: QuizSummaryItem[];
+}

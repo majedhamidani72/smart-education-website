@@ -9,22 +9,29 @@ interface Props {
 
 const TYPE_LABELS: Record<string, string> = {
   teaching: '🎥 تدریس',
-  step_by_step: '📝 گام‌به‌گام',
   sample_questions: '📄 نمونه سوال',
+  // گام‌به‌گام عمداً حذف شده — فعلاً از دید کاربر پنهان است، هرچند
+  // در بک‌اند و پنل ادمین موجود و کامل است.
 };
 
+const HIDDEN_TYPES = ['step_by_step'];
+
 export default function BookContent({ items }: Props) {
+  const visibleItemsAll = items.filter(
+    (i) => !HIDDEN_TYPES.includes(i.content_type?.slug ?? '')
+  );
+
   // فقط انواعی که واقعاً محتوا دارند نشان داده می‌شوند — نه یک
-  // تب ثابت و همیشگی برای هر سه نوع.
+  // تب ثابت و همیشگی برای هر نوع.
   const typesPresent = Array.from(
-    new Set(items.map((i) => i.content_type?.slug).filter(Boolean))
+    new Set(visibleItemsAll.map((i) => i.content_type?.slug).filter(Boolean))
   ) as string[];
 
   const [activeType, setActiveType] = useState<string | null>(
     typesPresent[0] ?? null
   );
 
-  if (items.length === 0) {
+  if (visibleItemsAll.length === 0) {
     return (
       <div className="rounded-xl bg-gray-50 p-6 text-center text-sm text-gray-500">
         هنوز محتوایی برای این کتاب منتشر نشده است.
@@ -32,20 +39,20 @@ export default function BookContent({ items }: Props) {
     );
   }
 
-  const visibleItems = items
+  const visibleItems = visibleItemsAll
     .filter((i) => i.content_type?.slug === activeType)
     .sort((a, b) => a.sort_order - b.sort_order);
 
   return (
     <div>
-      <div className="mb-6 flex gap-2">
+      <div className="mb-5 flex gap-2">
         {typesPresent.map((slug) => (
           <button
             key={slug}
             onClick={() => setActiveType(slug)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
               activeType === slug
-                ? 'bg-gray-900 text-white'
+                ? 'bg-violet-700 text-white shadow-sm'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
@@ -54,18 +61,18 @@ export default function BookContent({ items }: Props) {
         ))}
       </div>
 
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {visibleItems.map((item) => (
-          <ContentItemRow key={item.id} item={item} />
+          <ContentItemCard key={item.id} item={item} />
         ))}
       </div>
     </div>
   );
 }
 
-function ContentItemRow({ item }: { item: ContentItem }) {
+function ContentItemCard({ item }: { item: ContentItem }) {
   return (
-    <div className="rounded-xl border border-gray-100 bg-white p-4">
+    <div className="rounded-xl border border-gray-100 bg-white p-4 transition hover:shadow-md">
       <div className="mb-2 flex items-center justify-between gap-3">
         <span className="font-medium text-gray-800">{item.title}</span>
         {!item.has_access && (
@@ -105,25 +112,10 @@ function ContentPlayer({ item }: { item: ContentItem }) {
         href={item.pdf_file.file}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm text-blue-600 underline"
+        className="text-sm font-medium text-violet-700 underline"
       >
         باز کردن فایل PDF
       </a>
-    );
-  }
-
-  if (item.step_by_step?.pages?.length) {
-    return (
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-        {item.step_by_step.pages.map((page) => (
-          <img
-            key={page.id}
-            src={page.image ?? ''}
-            alt={`صفحه ${page.page_number}`}
-            className="rounded-lg border border-gray-100"
-          />
-        ))}
-      </div>
     );
   }
 

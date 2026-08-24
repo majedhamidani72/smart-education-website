@@ -1,9 +1,11 @@
 import { getBook } from '@/lib/books';
 import { getTeachersForBook } from '@/lib/teachers';
 import { getBookContent } from '@/lib/content';
+import { getBookQuizSummary } from '@/lib/quizzes';
 import BackLink from '@/components/BackLink';
 import TeacherCard from '@/components/TeacherCard';
 import BookContent from '@/components/BookContent';
+import QuizSummarySection from '@/components/QuizSummarySection';
 
 export default async function BookPage({
   params,
@@ -80,7 +82,10 @@ async function BookContentSection({
   book: import('@/types').Book;
   teacherId: number;
 }) {
-  const items = await getBookContent(book.id);
+  const [items, quizSummary] = await Promise.all([
+    getBookContent(book.id),
+    getBookQuizSummary(book.id),
+  ]);
 
   return (
     <div>
@@ -91,6 +96,7 @@ async function BookContentSection({
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-8">
+        <QuizSummarySection summary={quizSummary} />
         <BookContent items={items} />
       </div>
     </div>
