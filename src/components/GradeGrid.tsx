@@ -43,26 +43,18 @@ export default function GradeGrid({ grades }: Props) {
     .sort((a, b) => a.grade_number - b.grade_number);
 
   return (
-    <div className="space-y-8">
-      <GradeSection title="دوره‌ی ابتدایی" grades={elementary} />
-      <GradeSection title="دوره‌ی متوسطه" grades={secondary} />
+    <div className="space-y-3">
+      <GradeSection grades={elementary} />
+      <GradeSection grades={secondary} />
     </div>
   );
 }
 
-function GradeSection({
-  title,
-  grades,
-}: {
-  title: string;
-  grades: Grade[];
-}) {
+function GradeSection({ grades }: { grades: Grade[] }) {
   if (grades.length === 0) return null;
 
   return (
-    <div>
-      <p className="mb-3 text-sm text-gray-400">{title}</p>
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
         {grades.map((grade) => {
           const style = GRADE_STYLE[grade.grade_number] ?? {
             icon: '📘',
@@ -86,7 +78,6 @@ function GradeSection({
             </Link>
           );
         })}
-      </div>
     </div>
   );
 }

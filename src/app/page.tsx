@@ -18,12 +18,13 @@ export default async function Home() {
 
   return (
     <div>
-      {/* هدر با الگوی تزئینی — دقیقاً طبق طراحی همیار */}
-      <div className="pattern-header border-b border-gray-100 px-4 py-16 text-center">
-        <h1 className="mx-auto mb-3 max-w-lg text-2xl font-bold text-gray-900 sm:text-3xl">
+      {/* هدر با الگوی تزئینی — دقیقاً طبق طراحی همیار، ولی فاصله‌ی
+          بالا/پایینش کمتر شده تا صفحه فشرده‌تر باشد */}
+      <div className="pattern-header border-b border-gray-100 px-4 py-8 text-center">
+        <h1 className="mx-auto mb-2 max-w-lg text-xl font-bold text-gray-900 sm:text-2xl">
           یادگیری آسان، در هر زمان و هر مکان
         </h1>
-        <p className="mx-auto mb-6 max-w-md text-sm text-gray-500 sm:text-base">
+        <p className="mx-auto mb-4 max-w-md text-sm text-gray-500">
           پایه تحصیلی خود را انتخاب کنید و به دنیایی از محتوای آموزشی با
           کیفیت دسترسی پیدا کنید.
         </p>
@@ -35,9 +36,9 @@ export default async function Home() {
         </a>
       </div>
 
-      <div id="grades" className="mx-auto max-w-4xl px-4 py-10">
-        <div className="mb-8 text-center">
-          <h2 className="mb-2 text-xl font-bold text-gray-900">
+      <div id="grades" className="mx-auto max-w-4xl px-4 py-6">
+        <div className="mb-6 text-center">
+          <h2 className="mb-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
             انتخاب پایه تحصیلی
           </h2>
           <p className="text-sm text-gray-500">
