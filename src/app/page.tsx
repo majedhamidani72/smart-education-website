@@ -1,6 +1,7 @@
 import { getGrades } from '@/lib/grades';
 import GradeGrid from '@/components/GradeGrid';
 import { Grade } from '@/types';
+import Image from 'next/image';
 import {
   Video,
   ClipboardCheck,
@@ -24,7 +25,7 @@ export default async function Home() {
   return (
     <div>
       {/* ===== بخش ۱: Hero — پس‌زمینه‌ی کرم/هلویی روشن ===== */}
-      <div className="relative overflow-hidden bg-orange-50/80 px-4 pb-24 pt-14 sm:pb-32">
+      <div className="relative overflow-hidden bg-orange-50 px-4 pb-24 pt-14 sm:pb-32">
         {/* تزئینات ظریف پس‌زمینه */}
         <div
           aria-hidden
@@ -61,7 +62,17 @@ export default async function Home() {
             </div>
           </div>
 
-          <HeroIllustration />
+          {/* تصویر آموزشی واقعی — بدون هیچ پس‌زمینه یا حاشیه‌ی
+              اضافه، تا کرم‌رنگ خودِ تصویر با پس‌زمینه‌ی Hero یکی
+              دیده شود و لبه‌ی مستطیلی مشخص نباشد. */}
+          <Image
+            src="/hero-illustration.png"
+            alt="کوله‌پشتی، کتاب و لوازم‌التحریر"
+            width={320}
+            height={320}
+            priority
+            className="h-56 w-56 shrink-0 object-contain sm:h-72 sm:w-72"
+          />
         </div>
 
         {/* ردیف ۴ ویژگی — فقط قابلیت‌های واقعی پروژه */}
@@ -93,7 +104,7 @@ export default async function Home() {
             بیشتر و انحنای واضح‌تر از نسخه‌ی قبلی تا واقعاً هلالی
             دیده شود، نه یک خط تقریباً صاف. */}
         <svg
-          className="absolute inset-x-0 -bottom-px h-20 w-full text-emerald-50/60 sm:h-32"
+          className="absolute inset-x-0 -bottom-px h-20 w-full text-emerald-50 sm:h-32"
           viewBox="0 0 1440 150"
           preserveAspectRatio="none"
           aria-hidden
@@ -106,7 +117,7 @@ export default async function Home() {
       </div>
 
       {/* ===== بخش ۲: انتخاب پایه تحصیلی — پس‌زمینه‌ی سبز روشن ===== */}
-      <div id="grades" className="bg-emerald-50/60 px-4 py-16">
+      <div id="grades" className="bg-emerald-50 px-4 py-16">
         <div className="mx-auto max-w-5xl">
           <div className="mb-10 text-center">
             <h2 className="mb-3 text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -222,49 +233,5 @@ function WhyCard({
       <p className="mb-1 text-base font-bold text-gray-900">{title}</p>
       <p className="text-sm leading-6 text-gray-600">{desc}</p>
     </div>
-  );
-}
-
-/**
- * تصویرسازی آموزشی اصلی (کوله‌پشتی، کتاب‌ها، جامدادی، گلدان) —
- * نسخه‌ی ساده‌شده و کاملاً اصیل خودمان، با همان روح تصویر مرجع
- * (نه کپی مستقیم آن، چون فایل اصلی در پروژه وجود نداشت).
- */
-function HeroIllustration() {
-  return (
-    <svg
-      viewBox="0 0 300 260"
-      className="h-56 w-64 shrink-0 sm:h-64 sm:w-72"
-      aria-hidden
-    >
-      {/* دایره‌ی پس‌زمینه */}
-      <circle cx="150" cy="130" r="120" fill="#FFE8CC" opacity="0.5" />
-
-      {/* کتاب‌ها */}
-      <rect x="55" y="175" width="90" height="18" rx="4" fill="#60A5FA" />
-      <rect x="60" y="160" width="80" height="18" rx="4" fill="#FBBF24" />
-
-      {/* گلدان */}
-      <rect x="205" y="150" width="45" height="45" rx="10" fill="#F97316" />
-      <path
-        d="M212 150 Q227 100 242 150"
-        stroke="#22C55E"
-        strokeWidth="8"
-        strokeLinecap="round"
-        fill="none"
-      />
-
-      {/* جامدادی */}
-      <rect x="160" y="130" width="35" height="65" rx="8" fill="#FACC15" />
-      <rect x="165" y="105" width="4" height="30" rx="2" fill="#EF4444" />
-      <rect x="175" y="100" width="4" height="35" rx="2" fill="#3B82F6" />
-      <rect x="185" y="108" width="4" height="27" rx="2" fill="#22C55E" />
-
-      {/* کوله‌پشتی */}
-      <rect x="70" y="75" width="100" height="110" rx="26" fill="#34D399" />
-      <rect x="90" y="60" width="60" height="35" rx="18" fill="#10B981" />
-      <rect x="95" y="120" width="50" height="12" rx="6" fill="#059669" />
-      <circle cx="120" cy="90" r="7" fill="#FDE68A" />
-    </svg>
   );
 }
