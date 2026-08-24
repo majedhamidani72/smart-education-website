@@ -2,29 +2,43 @@
 
 import Link from 'next/link';
 import { Grade } from '@/types';
+import {
+  BookOpen,
+  Pencil,
+  Ruler,
+  Backpack,
+  BookMarked,
+  Lightbulb,
+  PenTool,
+  FlaskConical,
+  Atom,
+  Calculator,
+  Shapes,
+  Award,
+  type LucideIcon,
+} from 'lucide-react';
 
 interface Props {
   grades: Grade[];
 }
 
 /**
- * برای هر پایه، یک نماد و یک رنگ اختصاصی — طرحی خودمان (نه کپی
- * مستقیم سایت‌های دیگر): هر پایه یک بج گرد رنگی دارد که نماد
- * داخلش را برجسته می‌کند، به‌جای یک آیکون تخت روی زمینه‌ی سفید.
+ * یک آیکون و رنگ اختصاصی برای هر پایه — همه از یک کتابخانه‌ی
+ * واحد (lucide-react) با سبک خطی یکسان، نه اموجی پراکنده.
  */
-const GRADE_STYLE: Record<number, { icon: string; bg: string }> = {
-  1: { icon: '🌱', bg: 'bg-emerald-100' },
-  2: { icon: '🖍️', bg: 'bg-rose-100' },
-  3: { icon: '🎨', bg: 'bg-amber-100' },
-  4: { icon: '📐', bg: 'bg-sky-100' },
-  5: { icon: '🌍', bg: 'bg-teal-100' },
-  6: { icon: '🧪', bg: 'bg-violet-100' },
-  7: { icon: '🚀', bg: 'bg-indigo-100' },
-  8: { icon: '💡', bg: 'bg-yellow-100' },
-  9: { icon: '🧬', bg: 'bg-fuchsia-100' },
-  10: { icon: '📊', bg: 'bg-cyan-100' },
-  11: { icon: '🔭', bg: 'bg-blue-100' },
-  12: { icon: '🏆', bg: 'bg-orange-100' },
+const GRADE_STYLE: Record<number, { Icon: LucideIcon; bg: string; iconColor: string }> = {
+  1: { Icon: Backpack, bg: 'bg-emerald-50', iconColor: 'text-emerald-600' },
+  2: { Icon: Pencil, bg: 'bg-rose-50', iconColor: 'text-rose-600' },
+  3: { Icon: PenTool, bg: 'bg-amber-50', iconColor: 'text-amber-600' },
+  4: { Icon: Ruler, bg: 'bg-sky-50', iconColor: 'text-sky-600' },
+  5: { Icon: BookOpen, bg: 'bg-teal-50', iconColor: 'text-teal-600' },
+  6: { Icon: FlaskConical, bg: 'bg-violet-50', iconColor: 'text-violet-600' },
+  7: { Icon: BookMarked, bg: 'bg-indigo-50', iconColor: 'text-indigo-600' },
+  8: { Icon: Lightbulb, bg: 'bg-yellow-50', iconColor: 'text-yellow-600' },
+  9: { Icon: Atom, bg: 'bg-fuchsia-50', iconColor: 'text-fuchsia-600' },
+  10: { Icon: Calculator, bg: 'bg-cyan-50', iconColor: 'text-cyan-600' },
+  11: { Icon: Shapes, bg: 'bg-blue-50', iconColor: 'text-blue-600' },
+  12: { Icon: Award, bg: 'bg-orange-50', iconColor: 'text-orange-600' },
 };
 
 /**
@@ -43,7 +57,7 @@ export default function GradeGrid({ grades }: Props) {
     .sort((a, b) => a.grade_number - b.grade_number);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <GradeSection grades={elementary} />
       <GradeSection grades={secondary} />
     </div>
@@ -54,30 +68,32 @@ function GradeSection({ grades }: { grades: Grade[] }) {
   if (grades.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
-        {grades.map((grade) => {
-          const style = GRADE_STYLE[grade.grade_number] ?? {
-            icon: '📘',
-            bg: 'bg-gray-100',
-          };
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {grades.map((grade) => {
+        const style = GRADE_STYLE[grade.grade_number] ?? {
+          Icon: BookOpen,
+          bg: 'bg-gray-50',
+          iconColor: 'text-gray-600',
+        };
+        const Icon = style.Icon;
 
-          return (
-            <Link
-              key={grade.id}
-              href={`/grade/${grade.id}`}
-              className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-100 bg-white py-7 text-center transition hover:border-gray-200 hover:shadow-md"
+        return (
+          <Link
+            key={grade.id}
+            href={`/grade/${grade.id}`}
+            className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-8 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          >
+            <span
+              className={`flex h-16 w-16 items-center justify-center rounded-full transition group-hover:scale-105 ${style.bg}`}
             >
-              <span
-                className={`flex h-16 w-16 items-center justify-center rounded-full text-3xl transition group-hover:scale-110 ${style.bg}`}
-              >
-                {style.icon}
-              </span>
-              <span className="text-base font-semibold text-gray-800">
-                {grade.title}
-              </span>
-            </Link>
-          );
-        })}
+              <Icon size={30} strokeWidth={1.75} className={style.iconColor} />
+            </span>
+            <span className="text-base font-semibold text-gray-800">
+              {grade.title}
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
