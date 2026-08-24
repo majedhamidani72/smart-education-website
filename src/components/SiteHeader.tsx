@@ -6,14 +6,13 @@ import { GraduationCap } from 'lucide-react';
 import { getToken, clearToken } from '@/lib/token';
 
 /**
- * منوی وسط هدر — عمداً فقط شامل مقصدهایی است که واقعاً روی سایت
- * وجود دارند (خانه، آزمون آنلاین که به بخش پایه‌ها می‌رود). بلاگ،
- * دروس، درباره ما، و تماس با ما چون صفحه‌ی واقعی ندارند، اضافه
- * نشدند — نه برای این‌که در طرح مرجع نبودند.
+ * منوی وسط هدر — «خانه» و «آزمون آنلاین» چون مقصد واقعی روی
+ * سایت دارند؛ «درباره ما» و «تماس با ما» طبق دستور، پایین سایت
+ * (Footer) قرار گرفتند، نه اینجا.
  */
 const NAV_ITEMS = [
   { label: 'خانه', href: '/' },
-  { label: 'آزمون آنلاین', href: '/#grades' },
+  { label: 'آزمون آنلاین', href: '/exam' },
 ];
 
 export default function SiteHeader() {
@@ -30,7 +29,7 @@ export default function SiteHeader() {
           href="/"
           className="flex items-center gap-2 text-lg font-bold text-gray-900"
         >
-          <GraduationCap size={26} className="text-violet-700" />
+          <GraduationCap size={26} className="text-orange-500" />
           اسمارت اجوکیشن
         </Link>
 
@@ -39,7 +38,7 @@ export default function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-gray-600 transition hover:text-violet-700"
+              className="text-sm font-medium text-gray-600 transition hover:text-orange-600"
             >
               {item.label}
             </Link>
@@ -59,7 +58,7 @@ export default function SiteHeader() {
         ) : (
           <Link
             href="/login"
-            className="rounded-full bg-violet-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-violet-800"
+            className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-orange-600"
           >
             ورود
           </Link>

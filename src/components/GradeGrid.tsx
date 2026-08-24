@@ -20,6 +20,8 @@ import {
 
 interface Props {
   grades: Grade[];
+  /** برای استفاده‌ی دوباره در مسیر «آزمون آنلاین» با مقصد متفاوت */
+  basePath?: string;
 }
 
 /**
@@ -47,7 +49,7 @@ const GRADE_STYLE: Record<number, { Icon: LucideIcon; bg: string; iconColor: str
  * - ابتدایی: پایه → معلم → کتاب‌های همان معلم
  * - متوسطه: پایه → کتاب → (در صورت چند معلم) انتخاب معلم
  */
-export default function GradeGrid({ grades }: Props) {
+export default function GradeGrid({ grades, basePath = '/grade' }: Props) {
   const elementary = grades
     .filter((g) => g.grade_number <= 6)
     .sort((a, b) => a.grade_number - b.grade_number);
@@ -58,13 +60,19 @@ export default function GradeGrid({ grades }: Props) {
 
   return (
     <div className="space-y-4">
-      <GradeSection grades={elementary} />
-      <GradeSection grades={secondary} />
+      <GradeSection grades={elementary} basePath={basePath} />
+      <GradeSection grades={secondary} basePath={basePath} />
     </div>
   );
 }
 
-function GradeSection({ grades }: { grades: Grade[] }) {
+function GradeSection({
+  grades,
+  basePath,
+}: {
+  grades: Grade[];
+  basePath: string;
+}) {
   if (grades.length === 0) return null;
 
   return (
@@ -80,8 +88,8 @@ function GradeSection({ grades }: { grades: Grade[] }) {
         return (
           <Link
             key={grade.id}
-            href={`/grade/${grade.id}`}
-            className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-8 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+            href={`${basePath}/${grade.id}`}
+            className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-8 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-orange-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
           >
             <span
               className={`flex h-16 w-16 items-center justify-center rounded-full transition group-hover:scale-105 ${style.bg}`}
