@@ -37,10 +37,8 @@ export default async function Home() {
 
         <div className="relative mx-auto flex max-w-5xl flex-col-reverse items-center gap-10 md:flex-row md:justify-between">
           <div className="text-center md:text-right">
-            <h1 className="mx-auto mb-4 max-w-lg text-3xl font-extrabold leading-relaxed text-gray-900 sm:text-4xl md:mx-0">
-              یادگیری آسان،
-              <br />
-              موفقیت برای همیشه
+            <h1 className="mx-auto mb-4 max-w-xl text-xl font-extrabold leading-relaxed text-gray-900 sm:max-w-none sm:whitespace-nowrap sm:text-3xl md:mx-0 lg:text-4xl">
+              یادگیری آسان، موفقیت برای همیشه
             </h1>
             <p className="mx-auto mb-8 max-w-md text-base leading-8 text-gray-600 md:mx-0">
               با محتوای آموزشی باکیفیت، درس را بهتر یاد بگیر و با آزمون‌های
@@ -90,16 +88,18 @@ export default async function Home() {
           />
         </div>
 
-        {/* جداکننده‌ی هلالی — SVG موج که به بخش پایین (سبز روشن)
-            متصل می‌شود؛ عرض کامل صفحه و واکنش‌گرا */}
+        {/* جداکننده‌ی هلالی — منحنی دوموجی که به بخش پایین (سبز
+            روشن) متصل می‌شود؛ عرض کامل صفحه و واکنش‌گرا. ارتفاع
+            بیشتر و انحنای واضح‌تر از نسخه‌ی قبلی تا واقعاً هلالی
+            دیده شود، نه یک خط تقریباً صاف. */}
         <svg
-          className="absolute inset-x-0 -bottom-px h-16 w-full text-emerald-50/60 sm:h-24"
-          viewBox="0 0 1440 100"
+          className="absolute inset-x-0 -bottom-px h-20 w-full text-emerald-50/60 sm:h-32"
+          viewBox="0 0 1440 150"
           preserveAspectRatio="none"
           aria-hidden
         >
           <path
-            d="M0,40 C 240,100 480,0 720,30 C 960,60 1200,10 1440,50 L1440,100 L0,100 Z"
+            d="M0,80 C 200,140 350,20 550,50 C 750,80 850,10 1050,45 C 1250,80 1350,55 1440,65 L1440,150 L0,150 Z"
             fill="currentColor"
           />
         </svg>
