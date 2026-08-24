@@ -66,6 +66,45 @@ export interface ContentItem {
   step_by_step: StepByStep | null;
 }
 
+export interface QuestionOption {
+  id: number;
+  option_text: string | null;
+  image_path: string | null;
+}
+
+export interface Question {
+  id: number;
+  question_text: string | null;
+  image_path: string | null;
+  default_score: number;
+  options: QuestionOption[];
+}
+
+export interface QuizDetail {
+  id: number;
+  title: string;
+  description: string | null;
+  questions_count: number;
+  time_limit: number | null;
+  passing_percentage: number | null;
+  is_free: boolean;
+  questions: Question[];
+}
+
+export interface QuizResult {
+  score: {
+    total: number;
+    earned: number;
+    percentage: number;
+  };
+  statistics: {
+    correct_answers: number;
+    wrong_answers: number;
+    unanswered: number;
+  };
+  status: string;
+}
+
 export interface QuizSummaryItem {
   id: number;
   title: string;
