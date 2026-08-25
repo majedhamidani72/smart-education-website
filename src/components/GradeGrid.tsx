@@ -76,7 +76,7 @@ function GradeSection({
   if (grades.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+    <div className="flex flex-wrap justify-center gap-4">
       {grades.map((grade) => {
         const style = GRADE_STYLE[grade.grade_number] ?? {
           Icon: BookOpen,
@@ -89,12 +89,12 @@ function GradeSection({
           <Link
             key={grade.id}
             href={`${basePath}/${grade.id}`}
-            className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-8 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-orange-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+            className="group flex min-h-40 w-[calc(50%-0.5rem)] flex-col items-center justify-center gap-4 rounded-2xl border border-white/90 bg-white px-4 py-5 text-center shadow-[0_10px_28px_rgba(56,88,86,0.09)] transition hover:-translate-y-1 hover:border-orange-200 hover:shadow-[0_16px_34px_rgba(56,88,86,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 sm:w-40"
           >
             <span
-              className={`flex h-16 w-16 items-center justify-center rounded-full transition group-hover:scale-105 ${style.bg}`}
+              className={`flex h-20 w-20 items-center justify-center rounded-full transition group-hover:scale-105 ${style.bg}`}
             >
-              <Icon size={30} strokeWidth={1.75} className={style.iconColor} />
+              <Icon size={36} strokeWidth={1.65} className={style.iconColor} />
             </span>
             <span className="text-base font-semibold text-gray-800">
               {grade.title}
