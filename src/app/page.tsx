@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <div>
       {/* ===== بخش ۱: Hero — پس‌زمینه‌ی دقیقاً هم‌رنگ خودِ تصویر ===== */}
-      <div className="relative overflow-hidden bg-[#FEECDC] px-4 pb-24 pt-14 sm:pb-32">
+      <div className="relative overflow-hidden bg-[#FEECDC] px-4 pb-32 pt-8 sm:pb-48">
         {/* تزئینات ظریف پس‌زمینه */}
         <div
           aria-hidden
@@ -41,9 +41,8 @@ export default async function Home() {
             <h1 className="mx-auto mb-4 max-w-xl text-xl font-extrabold leading-relaxed text-gray-900 sm:max-w-none sm:whitespace-nowrap sm:text-3xl md:mx-0 lg:text-4xl">
               یادگیری آسان، موفقیت برای همیشه
             </h1>
-            <p className="mx-auto mb-8 max-w-md text-base leading-8 text-gray-600 md:mx-0 lg:max-w-none lg:whitespace-nowrap">
-              با محتوای آموزشی باکیفیت، درس را بهتر یاد بگیر و با
-              آزمون‌های هدفمند، پیشرفتت را بسنج.
+            <p className="mx-auto mb-8 max-w-md text-sm text-gray-600 sm:text-base sm:leading-8 md:mx-0 lg:max-w-none lg:whitespace-nowrap">
+              با محتوای آموزشی باکیفیت، درس را بهتر یاد بگیر و با آزمون‌های هدفمند، پیشرفتت را بسنج.
             </p>
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row md:justify-start">
               <a
@@ -71,7 +70,7 @@ export default async function Home() {
             width={420}
             height={420}
             priority
-            className="h-72 w-72 shrink-0 object-contain sm:h-96 sm:w-96"
+            className="h-80 w-80 shrink-0 object-contain sm:h-[26rem] sm:w-[26rem]"
           />
         </div>
 
@@ -105,20 +104,20 @@ export default async function Home() {
             پررنگ دقیقاً روی همان منحنی تا مرز با بخش پایین کاملاً
             واضح و تمیز دیده شود. */}
         <svg
-          className="absolute inset-x-0 -bottom-px h-20 w-full sm:h-32"
-          viewBox="0 0 1440 160"
+          className="absolute inset-x-0 -bottom-px h-28 w-full sm:h-44"
+          viewBox="0 0 1440 220"
           preserveAspectRatio="none"
           aria-hidden
         >
           <path
-            d="M0,80 C 120,20 240,20 360,80 C 480,140 600,140 720,80 C 840,20 960,20 1080,80 C 1200,140 1320,140 1440,80 L1440,160 L0,160 Z"
+            d="M0,110 C 120,10 240,10 360,110 C 480,210 600,210 720,110 C 840,10 960,10 1080,110 C 1200,210 1320,210 1440,110 L1440,220 L0,220 Z"
             className="fill-emerald-50"
           />
           <path
-            d="M0,80 C 120,20 240,20 360,80 C 480,140 600,140 720,80 C 840,20 960,20 1080,80 C 1200,140 1320,140 1440,80"
+            d="M0,110 C 120,10 240,10 360,110 C 480,210 600,210 720,110 C 840,10 960,10 1080,110 C 1200,210 1320,210 1440,110"
             fill="none"
             stroke="white"
-            strokeWidth="7"
+            strokeWidth="12"
           />
         </svg>
       </div>
