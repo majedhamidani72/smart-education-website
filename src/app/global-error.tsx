@@ -1,0 +1,2 @@
+'use client';
+export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) { return <html lang="fa" dir="rtl"><body><main style={{minHeight:'100vh',display:'grid',placeItems:'center',fontFamily:'sans-serif',background:'#f8fafc',padding:24}}><div style={{textAlign:'center'}}><h1>مشکلی پیش آمد</h1><p>لطفاً دوباره تلاش کنید.</p><button onClick={reset} style={{border:0,borderRadius:14,background:'#4338ca',color:'white',padding:'12px 24px',fontWeight:700}}>تلاش دوباره</button></div></main></body></html>; }

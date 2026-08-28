@@ -23,8 +23,14 @@ export async function getActivePlans(): Promise<Plan[]> {
  * از بین همه‌ی پلن‌های فعال، آن‌هایی که planable دقیقاً همین
  * کتاب است انتخاب می‌شوند.
  */
-export function filterPlansForBook(plans: Plan[], bookId: number): Plan[] {
+export function filterPlansForPurchase(plans: Plan[], book: { id: number; grade_id?: number | null; grade_number?: number | null }): Plan[] {
+  if (book.grade_number && book.grade_number <= 6 && book.grade_id) {
+    return plans.filter(
+      (plan) => plan.planable_type.endsWith('Grade') && plan.planable_id === book.grade_id
+    );
+  }
+
   return plans.filter(
-    (p) => p.planable_type.endsWith('Book') && p.planable_id === bookId
+    (plan) => plan.planable_type.endsWith('Book') && plan.planable_id === book.id
   );
 }

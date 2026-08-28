@@ -9,7 +9,7 @@
  * می‌شود)، چه از Client Component.
  */
 
-import { getToken } from '@/lib/token';
+import { clearToken, getToken } from '@/lib/token';
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://127.0.0.1:8000/api/v1';
@@ -52,6 +52,8 @@ export async function apiFetch<T>(
   });
 
   const json = (await response.json()) as ApiResponse<T>;
+
+  if (response.status === 401) clearToken();
 
   if (!response.ok || !json.success) {
     throw new ApiError(json.message ?? 'خطای غیرمنتظره رخ داد.', response.status);

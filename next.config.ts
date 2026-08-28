@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/grade/:path*',
+        destination: '/?mode=online_exam#learning-explorer',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

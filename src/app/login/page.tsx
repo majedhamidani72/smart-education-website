@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { sendOtp, verifyOtp } from '@/lib/auth';
+import { resendOtp, sendOtp, verifyOtp } from '@/lib/auth';
 import { saveToken } from '@/lib/token';
 import { ApiError } from '@/lib/api';
 import BackLink from '@/components/BackLink';
@@ -26,6 +26,15 @@ function LoginForm() {
   const [loginToken, setLoginToken] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [secondsLeft, setSecondsLeft] = useState(120);
+
+  useEffect(() => {
+    if (step !== 'code' || secondsLeft <= 0) return;
+    const timer = window.setInterval(() => {
+      setSecondsLeft((current) => Math.max(0, current - 1));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [step, secondsLeft]);
 
   async function handleSendOtp() {
     setError(null);
@@ -40,9 +49,26 @@ function LoginForm() {
     try {
       const result = await sendOtp(mobile);
       setLoginToken(result.login_token);
+      setSecondsLeft(120);
       setStep('code');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'خطایی رخ داد.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleResendOtp() {
+    if (secondsLeft > 0 || !loginToken) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await resendOtp(loginToken);
+      setLoginToken(result.login_token);
+      setCode('');
+      setSecondsLeft(120);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'ارسال مجدد کد با خطا مواجه شد.');
     } finally {
       setLoading(false);
     }
@@ -91,6 +117,11 @@ function LoginForm() {
             className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-lg tracking-widest"
             dir="ltr"
           />
+          <div className={`rounded-lg px-4 py-2 text-center text-sm font-medium ${secondsLeft > 0 ? 'bg-violet-50 text-violet-700' : 'bg-red-50 text-red-600'}`}>
+            {secondsLeft > 0
+              ? `اعتبار کد: ${String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:${String(secondsLeft % 60).padStart(2, '0')}`
+              : 'اعتبار کد به پایان رسیده است.'}
+          </div>
           {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             onClick={handleSendOtp}
@@ -115,10 +146,17 @@ function LoginForm() {
           {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             onClick={handleVerifyOtp}
-            disabled={loading}
+            disabled={loading || secondsLeft === 0}
             className="w-full rounded-lg bg-violet-700 py-3 font-medium text-white disabled:opacity-50"
           >
             {loading ? 'در حال بررسی...' : 'ورود'}
+          </button>
+          <button
+            onClick={handleResendOtp}
+            disabled={loading || secondsLeft > 0}
+            className="w-full rounded-lg border border-violet-200 py-2.5 text-sm font-medium text-violet-700 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            ارسال مجدد کد
           </button>
           <button
             onClick={() => setStep('mobile')}

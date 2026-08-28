@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { QuizSummary, QuizSummaryItem } from '@/types';
 import { getToken } from '@/lib/token';
+import { ClipboardCheck } from 'lucide-react';
 
 /**
  * سازماندهی آزمون‌های آنلاین به تفکیک دقیق سطح — بخش، فصل، یا
@@ -18,39 +19,34 @@ export default function QuizSummarySection({
   summary: QuizSummary;
   bookId: number;
 }) {
-  const total =
-    summary.section.length + summary.chapter.length + summary.book.length;
-
-  if (total === 0) {
-    return null;
+  if (summary.book.length === 0) {
+    return (
+      <section className="mb-10 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
+        <div className="flex items-center gap-3">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={25} /></span>
+          <div><h2 className="font-black text-gray-900">آزمون آنلاین کل کتاب</h2><p className="text-xs text-gray-500">آزمون جامع کتاب پس از انتشار در این قسمت فعال می‌شود.</p></div>
+        </div>
+        <div className="mt-6">
+          <div className="rounded-2xl border border-emerald-100 bg-white p-5"><span className="text-xl">🏆</span><strong className="mt-3 block text-sm text-slate-800">آزمون جامع کل کتاب</strong><span className="mt-1 block text-[10px] text-slate-400">به‌زودی فعال می‌شود</span></div>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <div className="mb-10 rounded-2xl border border-violet-100 bg-gradient-to-b from-violet-50/50 to-white p-5">
-      <div className="mb-5 flex items-center gap-2">
-        <span className="text-xl">🎯</span>
+    <section className="mb-10 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
+      <div className="mb-6 flex items-center gap-3">
+        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={25} /></span>
         <div>
-          <h2 className="font-bold text-gray-900">آزمون آنلاین</h2>
+          <h2 className="font-black text-gray-900">آزمون آنلاین کل کتاب</h2>
           <p className="text-xs text-gray-500">
-            دقیقاً همان قسمتی که خوانده‌ای را امتحان بده
+            سنجش جامع همه فصل‌های کتاب
           </p>
         </div>
       </div>
 
-      <div className="space-y-6">
-        <QuizGroup
-          title="آزمون‌های بخش/درس"
-          icon="📘"
-          items={summary.section}
-          bookId={bookId}
-          getSubtitle={(q) =>
-            [q.chapter_title, q.section_title].filter(Boolean).join(' — ')
-          }
-        />
-        <QuizGroup title="آزمون‌های فصل" icon="📙" items={summary.chapter} bookId={bookId} />
-        <QuizGroup title="آزمون کل کتاب" icon="📕" items={summary.book} bookId={bookId} />
-      </div>
-    </div>
+      <QuizGroup title="آزمون جامع کل کتاب" icon="🏆" items={summary.book} bookId={bookId} />
+    </section>
   );
 }
 
@@ -79,14 +75,9 @@ function QuizGroup({
       return;
     }
 
-    // بدون دسترسی؟ مستقیم به صفحه‌ی خرید همین کتاب — نه یک پیام
-    // ایستا. با دسترسی، مستقیم وارد خودِ آزمون می‌شویم.
-    if (!quiz.has_access) {
-      router.push(`/purchase?book_id=${bookId}`);
-      return;
-    }
-
-    router.push(`/quiz/${quiz.id}`);
+    // تصمیم نهایی درباره دسترسی با API شروع آزمون است؛ این صفحه ممکن است
+    // در رندر اولیه بدون توکن دریافت شده باشد و نباید خرید را اشتباه تکرار کند.
+    router.push(`/quiz/${quiz.id}?book_id=${bookId}`);
   }
 
   return (
@@ -110,11 +101,6 @@ function QuizGroup({
                 {quiz.question_count} سوال
               </p>
             </div>
-            {!quiz.has_access && (
-              <span className="whitespace-nowrap rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
-                🔒 پولی
-              </span>
-            )}
           </button>
         ))}
       </div>

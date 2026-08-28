@@ -1,13 +1,15 @@
 import Link from 'next/link';
-import { GraduationCap } from 'lucide-react';
+import Image from 'next/image';
 
 export default function SiteFooter() {
   return (
     <footer className="border-t border-slate-100 bg-[#fafafa] px-4 py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
-        <div className="flex items-center gap-2 text-sm font-bold text-gray-800">
-          <GraduationCap size={20} className="text-orange-500" />
-          اسمارت اجوکیشن
+      <div className="mx-auto flex max-w-[1480px] flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="flex items-center gap-2.5 text-sm font-black text-gray-800">
+          <span className="relative h-9 w-9 overflow-hidden rounded-xl bg-orange-50 ring-1 ring-orange-100">
+            <Image src="/darska-brand.png" alt="نشان کامل درسکا" fill sizes="36px" className="object-contain" />
+          </span>
+          درسکا
         </div>
 
         <nav className="flex items-center gap-6">

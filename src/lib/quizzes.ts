@@ -8,6 +8,11 @@ export async function getBookQuizSummary(bookId: number): Promise<QuizSummary> {
 export interface QuizAttempt {
   id: number;
   status: string;
+  answers?: Array<{
+    question_id: number;
+    question_snapshot: { text?: string | null; image_path?: string | null; difficulty?: string | null } | null;
+    options_snapshot: Array<{ id: number; text?: string | null; image_path?: string | null }> | null;
+  }>;
 }
 
 /**
@@ -33,8 +38,8 @@ export async function submitAnswer(
   attemptId: number,
   questionId: number,
   optionId: number | null
-): Promise<void> {
-  await apiFetch(`/quiz-attempts/${attemptId}/answer`, {
+): Promise<{ result: { is_correct: boolean; correct_option_id: number | null } }> {
+  return apiFetch<{ result: { is_correct: boolean; correct_option_id: number | null } }>(`/quiz-attempts/${attemptId}/answer`, {
     method: 'POST',
     body: JSON.stringify({
       question_id: questionId,

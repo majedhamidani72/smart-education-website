@@ -6,12 +6,12 @@ export default function AboutPage() {
       <BackLink href="/">بازگشت</BackLink>
 
       <h1 className="mb-6 text-2xl font-extrabold text-gray-900">
-        درباره‌ی اسمارت اجوکیشن
+        درباره‌ی درسکا
       </h1>
 
       <div className="space-y-4 text-base leading-8 text-gray-700">
         <p>
-          اسمارت اجوکیشن یک پلتفرم آموزشی برای دانش‌آموزان مدارس ایران است —
+          درسکا یک پلتفرم آموزشی برای دانش‌آموزان مدارس ایران است —
           از پایه‌ی اول ابتدایی تا پایه‌ی دوازدهم.
         </p>
         <p>

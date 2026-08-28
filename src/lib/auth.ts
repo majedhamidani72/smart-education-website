@@ -30,3 +30,10 @@ export async function verifyOtp(
     body: JSON.stringify({ login_token: loginToken, code }),
   });
 }
+
+export async function resendOtp(loginToken: string): Promise<SendOtpResult> {
+  return apiFetch<SendOtpResult>('/auth/resend-otp', {
+    method: 'POST',
+    body: JSON.stringify({ login_token: loginToken }),
+  });
+}

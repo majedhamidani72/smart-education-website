@@ -1,37 +1,4 @@
 'use client';
-
-import { AlertTriangle } from 'lucide-react';
-
-/**
- * Error Boundary سراسری — Next.js این کامپوننت را خودکار به‌جای
- * صفحه‌ی خام و پیش‌فرض خودش نشان می‌دهد، هر وقت هرکدام از
- * صفحات (پایه، کتاب، معلم و ...) موقع گرفتن داده از بک‌اند به
- * خطا بخورند.
- */
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  return (
-    <div className="mx-auto flex max-w-md flex-col items-center px-4 py-24 text-center">
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-50 text-red-600">
-        <AlertTriangle size={28} />
-      </div>
-      <h1 className="mb-2 text-lg font-bold text-gray-900">
-        دریافت اطلاعات با مشکل مواجه شد
-      </h1>
-      <p className="mb-6 text-sm text-gray-500">
-        مطمئن شو به اینترنت وصلی و بک‌اند روشن است، بعد دوباره تلاش کن.
-      </p>
-      <button
-        onClick={reset}
-        className="rounded-full bg-violet-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-violet-800"
-      >
-        تلاش مجدد
-      </button>
-    </div>
-  );
-}
+import Link from 'next/link';
+import { AlertCircle, RefreshCw } from 'lucide-react';
+export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) { return <main className="grid min-h-[70vh] place-items-center bg-slate-50 px-4"><div className="max-w-lg text-center"><span className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-orange-100 text-orange-600"><AlertCircle size={38} /></span><h1 className="mt-5 text-2xl font-black text-slate-900">بارگذاری صفحه انجام نشد</h1><p className="mt-3 text-sm leading-7 text-slate-500">اتصال اینترنت و روشن بودن سرور را بررسی کنید؛ اطلاعات شما از بین نرفته است.</p><div className="mt-6 flex justify-center gap-3"><button onClick={reset} className="inline-flex items-center gap-2 rounded-2xl bg-indigo-700 px-5 py-3 font-bold text-white"><RefreshCw size={18} /> تلاش دوباره</button><Link href="/" className="rounded-2xl border border-slate-200 bg-white px-5 py-3 font-bold text-slate-700">صفحه اصلی</Link></div></div></main>; }

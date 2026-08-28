@@ -5,10 +5,12 @@
  */
 
 const TOKEN_KEY = 'smart_education_token';
+export const AUTH_CHANGED_EVENT = 'smart-education-auth-changed';
 
 export function saveToken(token: string): void {
   if (typeof window !== 'undefined') {
     localStorage.setItem(TOKEN_KEY, token);
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
   }
 }
 
@@ -20,5 +22,6 @@ export function getToken(): string | null {
 export function clearToken(): void {
   if (typeof window !== 'undefined') {
     localStorage.removeItem(TOKEN_KEY);
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
   }
 }
