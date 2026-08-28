@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   BookOpen, Calculator, ChevronLeft, CircleCheck, ClipboardCheck,
-  FileQuestion, GraduationCap, LockKeyhole, Video,
+  FileQuestion, LockKeyhole, Video,
 } from 'lucide-react';
 import { Book, Chapter, ContentItem, Grade, QuizSummary, QuizSummaryItem, Section } from '@/types';
 import { getToken } from '@/lib/token';
@@ -65,9 +65,6 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
     router.replace(`/?grade_id=${active.grade.id}${activeBook ? `&book_id=${activeBook.book.id}` : ''}&mode=${mode}#learning-explorer`, { scroll: false });
   };
 
-  const gradeNumber = active ? toPersian(active.grade.grade_number) : '';
-  const gradeLabel = active ? `پایه ${active.grade.title}` : '';
-
   return (
     <section id="learning-explorer" className="grade-pattern darska-watermark scroll-mt-20 px-4 pb-10 pt-5 sm:pb-12 sm:pt-7">
       <div className="mx-auto max-w-[1480px]">
@@ -119,7 +116,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
                       className={`group flex min-h-20 items-center gap-3 rounded-2xl border p-4 text-right transition hover:-translate-y-1 hover:shadow-lg ${selected ? `border-transparent bg-gradient-to-l text-white shadow-lg ${accents[index % accents.length]}` : 'border-slate-200 bg-white text-slate-800 hover:border-blue-300'}`}
                     >
                       <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${selected ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'}`}><Icon size={24} /></span>
-                      <span><small className={`block text-xs ${selected ? 'text-white/75' : 'text-slate-400'}`}>کتاب</small><strong className="mt-1 block text-lg font-black">{book.title}</strong></span>
+                      <span><small className={`block text-xs ${selected ? 'text-white/75' : 'text-slate-400'}`}>کتاب</small><strong className="mt-1 block text-lg font-black">{book.title} {active.grade.title}</strong></span>
                       {selected && <CircleCheck size={20} className="mr-auto" />}
                     </button>
                   );
@@ -128,20 +125,12 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
             </div>
           )}
 
-          <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
-          <aside className="rounded-[2rem] bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 p-7 text-white shadow-[0_20px_45px_rgba(37,99,235,0.2)]">
-            <span className="inline-flex rounded-full bg-white/15 px-3 py-1.5 text-xs font-bold ring-1 ring-white/20">پایه انتخاب‌شده</span>
-            <span className="mt-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-3xl font-black text-blue-600 shadow-xl">{gradeNumber}</span>
-            <h3 className="mt-5 text-3xl font-black">{gradeLabel}</h3>
-            <p className="mt-3 text-sm leading-7 text-blue-100">درس‌های این پایه را انتخاب کن و وارد مسیر تدریس، تمرین و آزمون شو.</p>
-            <div className="mt-6 flex items-center gap-2 border-t border-white/15 pt-5 text-xs text-blue-100"><GraduationCap size={18} /> محتوای مناسب همین پایه</div>
-          </aside>
-
+          <div>
           <div className="rounded-[2rem] border border-orange-100 bg-gradient-to-l from-orange-50 via-white to-amber-50 p-6 shadow-[0_15px_45px_rgba(249,115,22,0.09)] sm:p-8">
             <div className="flex flex-col gap-7 xl:flex-row xl:items-center xl:justify-between">
               <div className="flex items-center gap-4">
                 <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-orange-500 text-white shadow-lg shadow-orange-100"><Calculator size={40} /></span>
-                <div><h3 className="text-2xl font-black text-slate-900 sm:text-3xl">{activeBook?.book.title ?? `درس‌های پایه ${active.grade.title}`}</h3></div>
+                <div><h3 className="text-2xl font-black text-slate-900 sm:text-3xl">{activeBook ? `${activeBook.book.title} ${active.grade.title}` : `کتاب‌های پایه ${active.grade.title}`}</h3></div>
               </div>
 
               {activeBook ? (
