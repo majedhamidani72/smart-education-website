@@ -12,6 +12,8 @@ const NAV_ITEMS = [
   { label: 'جست‌وجو', href: '/search' },
   { label: 'پاورپوینت تدریس', href: '/powerpoints' },
   { label: 'پایه‌ها و دروس', href: '/#learning-explorer' },
+  { label: 'درباره ما', href: '/about' },
+  { label: 'تماس با ما', href: '/contact' },
   { label: 'آزمون آنلاین', href: '/?mode=online_exam#learning-explorer', pill: true },
 ];
 

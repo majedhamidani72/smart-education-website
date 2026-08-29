@@ -9,7 +9,7 @@ import { getToken } from '@/lib/token';
 import { requestPayment } from '@/lib/purchases';
 import { buyPowerpoint, cancelPowerpointOrder, downloadPowerpoint, getPowerpointOrders, getPowerpoints, Powerpoint, PowerpointOrder } from '@/lib/powerpoints';
 
-export default function PowerpointsPage() {
+function LegacyPowerpointsPage() {
   const router = useRouter();
   const [items, setItems] = useState<Powerpoint[]>([]);
   const [orders, setOrders] = useState<PowerpointOrder[]>([]);
@@ -46,3 +46,6 @@ export default function PowerpointsPage() {
   {selected && <div role="dialog" aria-modal="true" className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/55 px-4 backdrop-blur-sm" onClick={() => setSelected(null)}><div className="w-full max-w-lg rounded-[2rem] bg-white p-6 shadow-2xl" onClick={(event) => event.stopPropagation()}><button onClick={() => setSelected(null)} className="float-left rounded-xl bg-slate-100 p-2"><X size={19} /></button><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-700"><ShieldCheck size={28} /></span><h2 className="mt-4 text-xl font-black">قانون استفاده از پاورپوینت</h2><p className="mt-3 text-sm leading-7 text-slate-600">خریدار حق فروش مجدد، انتشار در سایت یا شبکه‌های اجتماعی، تدریس آنلاین یا ارائه فایل در پلتفرم‌های دیگر را ندارد. استفاده فقط برای تدریس حضوری در کلاس و دانش‌آموزان همان کلاس مجاز است.</p><label className="mt-5 flex cursor-pointer items-start gap-3 rounded-2xl border border-indigo-100 bg-indigo-50 p-4 text-sm font-bold leading-6 text-indigo-950"><input type="checkbox" checked={accepted} onChange={(event) => setAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-indigo-600" />این شرایط را خواندم و می‌پذیرم.</label><button disabled={!accepted || busy === selected.id} onClick={purchase} className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-700 py-3.5 font-black text-white disabled:opacity-40"><Check size={20} /> تأیید و ادامه پرداخت</button></div></div>}
   </main>;
 }
+
+void LegacyPowerpointsPage;
+export { default } from '@/components/PowerpointCatalog';

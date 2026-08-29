@@ -4,8 +4,9 @@ import { getToken } from '@/lib/token';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://127.0.0.1:8000/api/v1';
 
 export interface Powerpoint {
-  id: number; title: string; description?: string; preview_image?: string; price: number;
+  id: number; slug?: string; title: string; description?: string; preview_image?: string; price: number;
   discount_price?: number; final_price: number; discount_percent: number; slides_count?: number;
+  sample_slides_count?: number; has_preview: boolean; features: string[]; is_featured: boolean; updated_at?: string;
   owned: boolean; grade: { id: number; title?: string }; book: { id: number; title?: string };
   chapter: { id: number; title?: string };
 }
@@ -17,6 +18,14 @@ export interface PowerpointOrder {
 
 export async function getPowerpoints() {
   return apiFetch<{ items: Powerpoint[]; count: number }>('/powerpoints');
+}
+
+export async function getPowerpoint(id: number) {
+  return apiFetch<Powerpoint>(`/powerpoints/${id}`);
+}
+
+export function getPowerpointPreviewUrl(id: number) {
+  return `${API_BASE_URL}/powerpoints/${id}/preview`;
 }
 
 export async function buyPowerpoint(id: number) {
