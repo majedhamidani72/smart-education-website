@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, Download, FileSliders, GraduationCap, Layers3 } from 'lucide-react';
 import { downloadPowerpoint, getPowerpoints, Powerpoint } from '@/lib/powerpoints';
+import PowerpointPrice from '@/components/PowerpointPrice';
 
 export default function PowerpointCatalog() {
   const [items, setItems] = useState<Powerpoint[]>([]);
@@ -59,10 +60,11 @@ export default function PowerpointCatalog() {
               <Link href={`/powerpoints/${item.id}`} className="block">
                 <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-orange-100 to-indigo-100">
                   {item.preview_image ? <Image src={item.preview_image} alt={`جلد ${item.title}`} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" /> : <FileSliders className="absolute inset-0 m-auto text-indigo-400" size={62} />}
+                  {item.discount_percent > 0 && <span className="absolute right-3 top-3 rounded-full bg-rose-500 px-3 py-1 text-xs font-black text-white">{item.discount_percent.toLocaleString('fa-IR')}٪ تخفیف</span>}
                   {item.is_featured && <span className="absolute left-3 top-3 rounded-full bg-indigo-700 px-3 py-1 text-xs font-black text-white">منتخب</span>}
                   {item.has_preview && <span className="absolute bottom-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-slate-800 backdrop-blur">دارای نمونه PDF</span>}
                 </div>
-                <div className="p-5"><small className="font-bold text-indigo-500">پایه {item.grade.title} · {item.book.title}</small><h3 className="mt-2 text-base font-black text-slate-900">{item.title}</h3><p className="mt-2 line-clamp-2 min-h-12 text-xs leading-6 text-slate-500">{item.description || `پاورپوینت آماده ${item.chapter.title}`}</p><div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4"><strong className="text-base text-indigo-700">{item.final_price.toLocaleString('fa-IR')} تومان</strong><span className="inline-flex items-center gap-1 text-xs font-black text-orange-600">جزئیات و نمونه <ArrowLeft size={15} /></span></div></div>
+                <div className="p-5"><small className="font-bold text-indigo-500">پایه {item.grade.title} · {item.book.title}</small><h3 className="mt-2 text-base font-black text-slate-900">{item.title}</h3><p className="mt-2 line-clamp-2 min-h-12 text-xs leading-6 text-slate-500">{item.description || `پاورپوینت آماده ${item.chapter.title}`}</p><div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4"><PowerpointPrice item={item} /><span className="inline-flex items-center gap-1 text-xs font-black text-orange-600">جزئیات و نمونه <ArrowLeft size={15} /></span></div></div>
               </Link>
               {item.owned && <button onClick={() => downloadPowerpoint(item).catch((error) => setMessage(error.message))} className="mx-5 mb-5 flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 py-3 font-bold text-white"><Download size={18} /> دانلود فایل خریداری‌شده</button>}
             </article>
