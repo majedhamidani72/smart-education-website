@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# package-lock.json is intentionally NOT committed for this project.
+# Liara's Next.js build environment (as of the builder image in use)
+# runs Node 22, where `npm ci` hits a known npm CLI bug
+# ("Exit handler never called!", npm/cli#8974) that reliably crashes
+# the build. `npm install` (used automatically when no lock file is
+# present) does not hit this bug. Once Liara's build image or npm
+# itself fixes this, package-lock.json can be regenerated and
+# committed again for reproducible installs.
+package-lock.json
