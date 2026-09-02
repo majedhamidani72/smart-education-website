@@ -35,7 +35,7 @@ export default function BookAccordion({ books, extraQuery = '' }: Props) {
               onClick={() => setOpenBookId(isOpen ? null : book.id)}
               className="flex w-full items-center justify-between gap-3 px-5 py-4 text-right transition hover:bg-gray-50"
             >
-              <span className="text-lg font-semibold text-gray-800">
+              <span className="text-base font-semibold text-gray-800">
                 {book.title}
               </span>
               <span

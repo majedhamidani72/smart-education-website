@@ -69,7 +69,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
     <section id="learning-explorer" className="grade-pattern darska-watermark scroll-mt-20 px-4 pb-10 pt-5 sm:pb-12 sm:pt-7">
       <div className="mx-auto max-w-[1480px]">
         <div className="text-center">
-          <h2 className="text-3xl font-black text-[#242238] sm:text-4xl">پایه تحصیلی خودت را انتخاب کن</h2>
+          <h2 className="text-2xl font-black text-[#242238] sm:text-3xl">پایه تحصیلی خودت را انتخاب کن</h2>
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -81,7 +81,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
                 onClick={() => selectGrade(option.grade.id)}
                 className={`group flex min-h-28 items-center gap-3 rounded-2xl border p-5 text-right transition hover:-translate-y-1 ${selected ? 'border-blue-600 bg-blue-600 text-white shadow-[0_14px_30px_rgba(37,99,235,0.2)]' : 'border-white bg-white text-slate-700 shadow-[0_7px_22px_rgba(44,72,69,0.07)] hover:border-blue-200'}`}
               >
-                <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg font-black ${selected ? 'bg-white text-blue-600' : 'bg-blue-50 text-blue-600'}`}>{toPersian(option.grade.grade_number)}</span>
+                <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-base font-black ${selected ? 'bg-white text-blue-600' : 'bg-blue-50 text-blue-600'}`}>{toPersian(option.grade.grade_number)}</span>
                 <span><small className={`block text-xs font-medium ${selected ? 'text-blue-100' : 'text-slate-400'}`}>ابتدایی</small><strong className="mt-1 block text-base font-black">پایه {option.grade.title}</strong></span>
                 {selected && <CircleCheck size={17} className="mr-auto" />}
               </button>
@@ -95,7 +95,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
               <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <span className="text-xs font-black text-blue-600">کتاب‌های پایه {active.grade.title}</span>
-                  <h3 className="mt-1 text-xl font-black text-slate-900 sm:text-2xl">کتاب موردنظرت را انتخاب کن</h3>
+                  <h3 className="mt-1 text-lg font-black text-slate-900 sm:text-xl">کتاب موردنظرت را انتخاب کن</h3>
                 </div>
                 <p className="text-sm text-slate-500">کتاب‌های فارسی، ریاضی و سایر کتاب‌های ثبت‌شده این پایه</p>
               </div>
@@ -116,7 +116,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
                       className={`group flex min-h-20 items-center gap-3 rounded-2xl border p-4 text-right transition hover:-translate-y-1 hover:shadow-lg ${selected ? `border-transparent bg-gradient-to-l text-white shadow-lg ${accents[index % accents.length]}` : 'border-slate-200 bg-white text-slate-800 hover:border-blue-300'}`}
                     >
                       <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${selected ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'}`}><Icon size={24} /></span>
-                      <span><small className={`block text-xs ${selected ? 'text-white/75' : 'text-slate-400'}`}>کتاب</small><strong className="mt-1 block text-lg font-black">{book.title} {active.grade.title}</strong></span>
+                      <span><small className={`block text-xs ${selected ? 'text-white/75' : 'text-slate-400'}`}>کتاب</small><strong className="mt-1 block text-base font-black">{book.title} {active.grade.title}</strong></span>
                       {selected && <CircleCheck size={20} className="mr-auto" />}
                     </button>
                   );
@@ -130,7 +130,7 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
             <div className="flex flex-col gap-7 xl:flex-row xl:items-center xl:justify-between">
               <div className="flex items-center gap-4">
                 <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-orange-500 text-white shadow-lg shadow-orange-100"><Calculator size={40} /></span>
-                <div><h3 className="text-2xl font-black text-slate-900 sm:text-3xl">{activeBook ? `${activeBook.book.title} ${active.grade.title}` : `کتاب‌های پایه ${active.grade.title}`}</h3></div>
+                <div><h3 className="text-xl font-black text-slate-900 sm:text-2xl">{activeBook ? `${activeBook.book.title} ${active.grade.title}` : `کتاب‌های پایه ${active.grade.title}`}</h3></div>
               </div>
 
               {activeBook ? (
@@ -177,7 +177,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
   if (mode === 'online_exam') {
     return (
       <div className="mt-7 border-t border-orange-100 pt-7">
-        <Link href={`/book/${book.id}?type=online_exam&grade_id=${grade.id}`} className="group flex min-h-24 items-center gap-4 rounded-2xl border border-emerald-100 bg-emerald-50 p-5 transition hover:-translate-y-1 hover:shadow-md"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500 text-white"><ClipboardCheck size={28} /></span><span><small className="text-sm font-bold text-emerald-600">جمع‌بندی نهایی</small><strong className="mt-1 block text-xl text-slate-900">آزمون آنلاین کل کتاب</strong><span className="mt-1 block text-sm text-slate-500">همه فصل‌های {book.title}</span></span><ChevronLeft className="mr-auto text-emerald-500 transition group-hover:-translate-x-1" /></Link>
+        <Link href={`/book/${book.id}?type=online_exam&grade_id=${grade.id}`} className="group flex min-h-24 items-center gap-4 rounded-2xl border border-emerald-100 bg-emerald-50 p-5 transition hover:-translate-y-1 hover:shadow-md"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500 text-white"><ClipboardCheck size={28} /></span><span><small className="text-sm font-bold text-emerald-600">جمع‌بندی نهایی</small><strong className="mt-1 block text-lg text-slate-900">آزمون آنلاین کل کتاب</strong><span className="mt-1 block text-sm text-slate-500">همه فصل‌های {book.title}</span></span><ChevronLeft className="mr-auto text-emerald-500 transition group-hover:-translate-x-1" /></Link>
       </div>
     );
   }
@@ -191,7 +191,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
         {chapters.map((chapter, index) => (
           <Link key={chapter.id} href={`/book/${book.id}?type=${mode}&chapter=${chapter.id}&grade_id=${grade.id}`} className="group flex min-h-20 items-center gap-4 rounded-2xl border border-orange-100 bg-white p-4 transition hover:border-orange-300 hover:shadow-md">
             <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 font-black text-orange-600">{toPersian(index + 1)}</span>
-            <span><small className="font-black text-orange-500">نمونه‌سؤال فصل {toPersian(index + 1)}</small><strong className="mt-1 block text-lg text-slate-800">{chapter.title}</strong></span>
+            <span><small className="font-black text-orange-500">نمونه‌سؤال فصل {toPersian(index + 1)}</small><strong className="mt-1 block text-base text-slate-800">{chapter.title}</strong></span>
             <ChevronLeft className="mr-auto text-slate-300 transition group-hover:-translate-x-1" size={18} />
           </Link>
         ))}
@@ -238,7 +238,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
 }
 
 function TeachingUnit({ number, eyebrow, title, subtitle, children }: { number: number; eyebrow: string; title: string; subtitle?: string; children: React.ReactNode }) {
-  return <details open className="group/unit overflow-hidden rounded-2xl border border-violet-100 bg-white transition hover:border-violet-300 hover:shadow-md"><summary className="flex min-h-20 cursor-pointer list-none items-center gap-4 p-4 marker:hidden"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 font-black text-violet-600">{toPersian(number)}</span><span className="flex-1"><small className="font-black text-violet-500">{eyebrow}</small><strong className="mt-1 block text-lg text-slate-800">{title}</strong>{subtitle && <span className="mt-1 block text-xs text-slate-400">{subtitle}</span>}</span><span className="text-xs font-bold text-violet-500 group-open/unit:hidden">نمایش آیتم‌ها</span><span className="hidden text-xs font-bold text-slate-400 group-open/unit:inline">بستن درس</span><ChevronLeft size={18} className="rotate-90 text-slate-400 transition group-open/unit:-rotate-90" /></summary><div className="space-y-2 border-t border-violet-50 bg-violet-50/20 p-3 sm:p-4">{children}</div></details>;
+  return <details open className="group/unit overflow-hidden rounded-2xl border border-violet-100 bg-white transition hover:border-violet-300 hover:shadow-md"><summary className="flex min-h-20 cursor-pointer list-none items-center gap-4 p-4 marker:hidden"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 font-black text-violet-600">{toPersian(number)}</span><span className="flex-1"><small className="font-black text-violet-500">{eyebrow}</small><strong className="mt-1 block text-base text-slate-800">{title}</strong>{subtitle && <span className="mt-1 block text-xs text-slate-400">{subtitle}</span>}</span><span className="text-xs font-bold text-violet-500 group-open/unit:hidden">نمایش آیتم‌ها</span><span className="hidden text-xs font-bold text-slate-400 group-open/unit:inline">بستن درس</span><ChevronLeft size={18} className="rotate-90 text-slate-400 transition group-open/unit:-rotate-90" /></summary><div className="space-y-2 border-t border-violet-50 bg-violet-50/20 p-3 sm:p-4">{children}</div></details>;
 }
 
 function TeachingRow({ item, index, href }: { item: ContentItem; index: number; href: string }) {
@@ -254,7 +254,7 @@ function InlineQuizRow({ quiz, bookId, label, displayTitle }: { quiz: QuizSummar
     // توکن موقتاً false باشد؛ مرجع نهایی، API شروع آزمون است.
     router.push(destination);
   };
-  return <button type="button" onClick={openQuiz} className="group flex min-h-16 w-full items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-right transition hover:-translate-y-0.5 hover:border-emerald-400 hover:shadow-sm"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white"><ClipboardCheck size={20} /></span><span className="flex-1">{!displayTitle && <small className="font-black text-emerald-600">{label}</small>}<strong className="block text-base font-black text-slate-800 sm:text-lg">{displayTitle ?? quiz.title}</strong></span><span className="text-xs font-bold text-emerald-700">{toPersian(quiz.question_count)} سؤال</span><ChevronLeft size={17} className="text-emerald-400 transition group-hover:-translate-x-1" /></button>;
+  return <button type="button" onClick={openQuiz} className="group flex min-h-16 w-full items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-right transition hover:-translate-y-0.5 hover:border-emerald-400 hover:shadow-sm"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white"><ClipboardCheck size={20} /></span><span className="flex-1">{!displayTitle && <small className="font-black text-emerald-600">{label}</small>}<strong className="block text-base font-black text-slate-800 sm:text-base">{displayTitle ?? quiz.title}</strong></span><span className="text-xs font-bold text-emerald-700">{toPersian(quiz.question_count)} سؤال</span><ChevronLeft size={17} className="text-emerald-400 transition group-hover:-translate-x-1" /></button>;
 }
 
 function formatPageLabel(value: string) {

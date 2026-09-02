@@ -99,7 +99,7 @@ function LoginForm() {
     <div className="mx-auto max-w-sm px-4 py-16">
       <BackLink href="/">بازگشت</BackLink>
 
-      <h1 className="mb-2 text-xl font-bold text-gray-900">ورود</h1>
+      <h1 className="mb-2 text-lg font-bold text-gray-900">ورود</h1>
       <p className="mb-6 text-sm text-gray-500">
         {step === 'mobile'
           ? 'شماره موبایلت رو وارد کن تا کد ورود برات پیامک بشه.'
@@ -114,7 +114,7 @@ function LoginForm() {
             placeholder="09123456789"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
-            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-lg tracking-widest"
+            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-base tracking-widest"
             dir="ltr"
           />
           <div className={`rounded-lg px-4 py-2 text-center text-sm font-medium ${secondsLeft > 0 ? 'bg-violet-50 text-violet-700' : 'bg-red-50 text-red-600'}`}>
@@ -140,7 +140,7 @@ function LoginForm() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             maxLength={6}
-            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-2xl tracking-[0.5em]"
+            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-xl tracking-[0.5em]"
             dir="ltr"
           />
           {error && <p className="text-sm text-red-600">{error}</p>}
