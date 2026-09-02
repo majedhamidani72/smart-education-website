@@ -38,7 +38,7 @@ async function BookContentSection({
 
   return (
     <div className="hero-pattern darska-watermark min-h-[calc(100vh-74px)]">
-      <div className="mx-auto max-w-[1280px] px-4 py-8 sm:py-10">
+      <div className="mx-auto max-w-[1280px] px-4 py-6 sm:py-8">
         <AdvertisementSlot position="book" />
         <BookContent items={items} bookId={book.id} bookTitle={book.title} gradeTitle={grade?.title ?? null} quizSummary={quizSummary} chapters={chapters} sections={sections} />
       </div>

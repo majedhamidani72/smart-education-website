@@ -43,15 +43,15 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="bg-gradient-to-b from-orange-50/70 via-white to-white px-4 py-10 sm:py-14">
+    <main className="bg-gradient-to-b from-orange-50/70 via-white to-white px-4 py-8 sm:py-10">
       <div className="mx-auto max-w-5xl">
         <BackLink href="/">بازگشت به خانه</BackLink>
-        <div className="mt-7 grid overflow-hidden rounded-[2rem] border border-orange-100 bg-white shadow-xl shadow-orange-100/40 lg:grid-cols-[0.75fr_1.25fr]">
+        <div className="mt-5 grid overflow-hidden rounded-[2rem] border border-orange-100 bg-white shadow-xl shadow-orange-100/40 lg:grid-cols-[0.75fr_1.25fr]">
           <aside className="bg-gradient-to-br from-orange-500 to-rose-500 p-7 text-white sm:p-10">
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15"><MessageSquareText size={28} /></span>
-            <h1 className="mt-6 text-2xl font-black">تماس با ما</h1>
+            <h1 className="mt-4 text-xl font-black">تماس با ما</h1>
             <p className="mt-4 text-sm leading-8 text-orange-50">سؤال، پیشنهاد یا مشکلتان را برای ما بنویسید. پیام شما مستقیم برای مدیریت درسکا ایمیل می‌شود.</p>
-            <div className="mt-9 space-y-4 border-t border-white/20 pt-7 text-sm">
+            <div className="mt-7 space-y-4 border-t border-white/20 pt-5 text-sm">
               <p className="flex items-center gap-3"><Phone size={19} /> پاسخ‌گویی با شماره‌ای که ثبت می‌کنید</p>
               <p className="flex items-center gap-3"><Mail size={19} /> ارسال مستقیم به واحد پشتیبانی</p>
             </div>
@@ -59,7 +59,7 @@ export default function ContactPage() {
           <section className="p-6 sm:p-10">
             <h2 className="text-lg font-black text-slate-900">پیامتان را بنویسید</h2>
             <p className="mt-2 text-sm text-slate-500">فیلدهای ستاره‌دار الزامی هستند.</p>
-            <form onSubmit={submit} className="mt-7 grid gap-5 sm:grid-cols-2">
+            <form onSubmit={submit} className="mt-5 grid gap-5 sm:grid-cols-2">
               <label className={fieldClass}>نام و نام خانوادگی *<input className={inputClass} name="name" required maxLength={100} placeholder="مثلاً علی رضایی" /></label>
               <label className={fieldClass}>شماره موبایل *<input className={inputClass} name="mobile" required inputMode="numeric" dir="ltr" pattern="09[0-9]{9}" maxLength={11} placeholder="09123456789" /></label>
               <label className={fieldClass}>ایمیل (اختیاری)<input className={inputClass} name="email" type="email" dir="ltr" maxLength={150} placeholder="name@gmail.com" /></label>

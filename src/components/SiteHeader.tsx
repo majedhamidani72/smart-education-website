@@ -52,15 +52,15 @@ export default function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/95 px-4 backdrop-blur-md">
-      <div className="mx-auto flex h-[74px] max-w-[1480px] items-center justify-between">
+      <div className="mx-auto flex h-14 max-w-[1480px] items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 font-black text-[#1f1d2f]">
-          <span className="relative h-14 w-14 overflow-hidden rounded-2xl bg-[#fff3e8] p-0.5 shadow-md shadow-orange-100 ring-1 ring-orange-100">
-            <Image src="/darska-brand.png" alt="نشان کامل درسکا" fill sizes="56px" className="object-contain" priority />
+          <span className="relative h-10 w-10 overflow-hidden rounded-2xl bg-[#fff3e8] p-0.5 shadow-md shadow-orange-100 ring-1 ring-orange-100">
+            <Image src="/darska-brand.png" alt="نشان کامل درسکا" fill sizes="40px" className="object-contain" priority />
           </span>
           <span className="text-base sm:text-lg">درسکا</span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {NAV_ITEMS.map((item) => {
             const path = item.href.split('#')[0];
             const active = item.href === '/' ? pathname === '/' : path !== '/' && pathname.startsWith(path);
@@ -109,7 +109,7 @@ export default function SiteHeader() {
             <p className="mt-2 text-sm leading-7 text-slate-500">
               آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-4 grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setShowLogoutConfirmation(false)}

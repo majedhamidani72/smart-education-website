@@ -96,11 +96,11 @@ function LoginForm() {
   }
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-16">
+    <div className="mx-auto max-w-sm px-4 py-12">
       <BackLink href="/">بازگشت</BackLink>
 
       <h1 className="mb-2 text-lg font-bold text-gray-900">ورود</h1>
-      <p className="mb-6 text-sm text-gray-500">
+      <p className="mb-4 text-sm text-gray-500">
         {step === 'mobile'
           ? 'شماره موبایلت رو وارد کن تا کد ورود برات پیامک بشه.'
           : `کدی که به ${mobile} پیامک شد رو وارد کن.`}
@@ -140,7 +140,7 @@ function LoginForm() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             maxLength={6}
-            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-xl tracking-[0.5em]"
+            className="w-full rounded-lg border border-gray-200 px-4 py-3 text-center text-lg tracking-[0.5em]"
             dir="ltr"
           />
           {error && <p className="text-sm text-red-600">{error}</p>}

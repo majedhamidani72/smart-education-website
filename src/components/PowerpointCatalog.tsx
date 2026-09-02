@@ -28,29 +28,29 @@ export default function PowerpointCatalog() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-orange-50/70 via-white to-indigo-50 px-4 py-10">
+    <main className="min-h-screen bg-gradient-to-b from-orange-50/70 via-white to-indigo-50 px-4 py-8">
       <div className="mx-auto max-w-7xl">
-        <header className="overflow-hidden rounded-[2rem] bg-gradient-to-l from-slate-950 to-indigo-900 px-6 py-9 text-white sm:px-10">
+        <header className="overflow-hidden rounded-[2rem] bg-gradient-to-l from-slate-950 to-indigo-900 px-6 py-7 text-white sm:px-10">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold"><FileSliders size={16} /> ابزار آماده تدریس معلم</span>
-          <h1 className="mt-4 text-2xl font-black sm:text-3xl">فروشگاه پاورپوینت‌های تدریس</h1>
+          <h1 className="mt-4 text-xl font-black sm:text-2xl">فروشگاه پاورپوینت‌های تدریس</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-indigo-100">ابتدا پایه و کتاب را انتخاب کنید؛ سپس نمونه PDF هر پاورپوینت را داخل صفحه محصول ورق بزنید.</p>
         </header>
 
-        <section className="mt-7 rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm sm:p-7">
+        <section className="mt-5 rounded-[2rem] border border-slate-100 bg-white p-5 shadow-sm sm:p-7">
           <div className="flex items-center gap-2 text-slate-900"><GraduationCap className="text-indigo-600" /><h2 className="font-black">انتخاب پایه</h2></div>
           <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
             <button onClick={() => selectGrade(null)} className={`shrink-0 rounded-2xl px-5 py-3 text-sm font-black transition ${gradeId === null ? 'bg-indigo-700 text-white shadow-lg shadow-indigo-100' : 'bg-slate-50 text-slate-600 hover:bg-indigo-50'}`}>همه پایه‌ها</button>
             {grades.map((grade) => <button key={grade.id} onClick={() => selectGrade(grade.id)} className={`shrink-0 rounded-2xl px-5 py-3 text-sm font-black transition ${gradeId === grade.id ? 'bg-indigo-700 text-white shadow-lg shadow-indigo-100' : 'bg-slate-50 text-slate-600 hover:bg-indigo-50'}`}>پایه {grade.title}</button>)}
           </div>
 
-          <div className="mt-6 flex items-center gap-2 border-t border-slate-100 pt-6 text-slate-900"><BookOpen className="text-orange-500" /><h2 className="font-black">انتخاب کتاب</h2></div>
+          <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-4 text-slate-900"><BookOpen className="text-orange-500" /><h2 className="font-black">انتخاب کتاب</h2></div>
           <div className="mt-4 flex flex-wrap gap-3">
             <button onClick={() => setBookId(null)} className={`rounded-xl border px-4 py-2.5 text-sm font-bold ${bookId === null ? 'border-orange-400 bg-orange-50 text-orange-700' : 'border-slate-200 text-slate-600'}`}>همه کتاب‌ها</button>
             {books.map((book) => <button key={book.id} onClick={() => setBookId(book.id)} className={`rounded-xl border px-4 py-2.5 text-sm font-bold ${bookId === book.id ? 'border-orange-400 bg-orange-50 text-orange-700' : 'border-slate-200 text-slate-600'}`}>{book.title}</button>)}
           </div>
         </section>
 
-        <div className="mt-8 flex items-center justify-between"><div className="flex items-center gap-2"><Layers3 className="text-indigo-600" /><h2 className="text-lg font-black text-slate-900">پاورپوینت‌های موجود</h2></div><span className="text-sm font-bold text-slate-400">{visibleItems.length.toLocaleString('fa-IR')} محصول</span></div>
+        <div className="mt-6 flex items-center justify-between"><div className="flex items-center gap-2"><Layers3 className="text-indigo-600" /><h2 className="text-lg font-black text-slate-900">پاورپوینت‌های موجود</h2></div><span className="text-sm font-bold text-slate-400">{visibleItems.length.toLocaleString('fa-IR')} محصول</span></div>
         {message && <p className="mt-5 rounded-2xl bg-rose-50 p-4 text-center text-sm font-bold text-rose-700">{message}</p>}
 
         <section className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -68,7 +68,7 @@ export default function PowerpointCatalog() {
             </article>
           ))}
         </section>
-        {!visibleItems.length && !message && <div className="mt-6 rounded-3xl border-2 border-dashed border-slate-200 bg-white p-12 text-center text-sm text-slate-500">برای این انتخاب هنوز پاورپوینتی ثبت نشده است.</div>}
+        {!visibleItems.length && !message && <div className="mt-4 rounded-3xl border-2 border-dashed border-slate-200 bg-white p-12 text-center text-sm text-slate-500">برای این انتخاب هنوز پاورپوینتی ثبت نشده است.</div>}
       </div>
     </main>
   );

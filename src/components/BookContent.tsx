@@ -95,7 +95,7 @@ function TeachingChapters({ bookId, bookTitle, chapters, sections }: { bookId: n
   return (
     <section className="rounded-3xl border border-violet-100 bg-violet-50/40 p-5 sm:p-7">
       <Header icon={Layers3} title={isMath ? 'تدریس فصل‌به‌فصل' : 'تدریس درس‌به‌درس'} text={isMath ? 'پس از بخش‌های آموزشی هر فصل، آزمون جمع‌بندی همان فصل قرار می‌گیرد.' : 'هر درس با نام واقعی ثبت‌شده در کتاب نمایش داده می‌شود.'} />
-      <div className="mt-7 space-y-5">
+      <div className="mt-5 space-y-5">
         {(isMath || lessons.length === 0 ? displayChapters.map((chapter) => ({ chapter, section: null })) : lessons).map(({ chapter, section }, index) => (
           <div key={section?.id ?? chapter.id} className="overflow-hidden rounded-2xl border border-white bg-white shadow-[0_8px_28px_rgba(76,29,149,0.06)]">
             <Link href={`/book/${bookId}?type=teaching&chapter=${chapter.id}${section ? `&section=${section.id}` : ''}`} className="group flex min-h-24 items-center gap-4 p-5 transition hover:bg-violet-50/40">
@@ -126,7 +126,7 @@ function ChapterTeaching({ chapterNumber, sectionNumber, bookId, bookTitle, grad
     <section className="rounded-3xl border border-orange-100 bg-[#fffaf3] p-5 shadow-[0_18px_55px_rgba(249,115,22,0.08)] sm:p-7">
       <Link href={`/book/${bookId}?type=teaching`} className="mb-5 inline-flex items-center gap-2 text-sm font-bold text-orange-600"><ArrowRight size={18} /> بازگشت به فصل‌ها</Link>
       <Header icon={BookOpenCheck} eyebrow={`${gradeTitle ? `پایه ${gradeTitle} • ` : ''}کتاب ${bookTitle} • ${isMath ? `تدریس فصل ${toPersian(chapterPosition)}` : 'فهرست درس‌ها'}`} title={sectionNumber ? (visibleSections[0]?.title ?? chapter.title) : chapter.title} />
-      <div className="mt-7 space-y-5">
+      <div className="mt-5 space-y-5">
         {(visibleSections.length > 0 ? visibleSections : fallbackSections(chapter.id)).map((section, index) => {
           const sectionItems = items.filter((item) => item.section_id === section.id).sort((a, b) => a.sort_order - b.sort_order);
           return (
@@ -150,10 +150,10 @@ function SampleQuestionChapters({ bookId, chapters }: { bookId: number; chapters
   return (
     <section className="rounded-3xl border border-orange-100 bg-orange-50/40 p-5 sm:p-7">
       <Header icon={FileQuestion} eyebrow="بانک نمونه‌سؤال" title="نمونه‌سؤالات فصل‌به‌فصل" text="برای هر فصل، تمرین‌های آموزشی، سؤالات امتحانی و فایل جمع‌بندی در یک محل قرار می‌گیرد." />
-      <div className="mt-7 grid gap-4 md:grid-cols-2">
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
         {displayChapters.map((chapter, index) => <Link href={`/book/${bookId}?type=sample_questions&chapter=${chapter.id}`} key={chapter.id} className="rounded-2xl border border-white bg-white p-5 shadow-[0_8px_26px_rgba(194,65,12,0.06)] transition hover:-translate-y-1"><div className="flex items-center gap-3"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 font-black text-orange-600">{toPersian(index + 1)}</span><div><small className="text-xs font-bold text-orange-500">نمونه‌سؤال فصل {toPersian(index + 1)}</small><h3 className="font-black text-slate-900">{chapter.title}</h3></div></div><div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] text-slate-500"><span className="rounded-xl bg-slate-50 p-2">تمرین آموزشی</span><span className="rounded-xl bg-slate-50 p-2">سؤالات امتحانی</span><span className="rounded-xl bg-slate-50 p-2">پاسخ تشریحی</span></div><div className="mt-4 flex items-center text-xs font-bold text-slate-400"><LockKeyhole size={14} className="ml-1" /> مشاهده فصل <ChevronLeft size={16} className="mr-auto" /></div></Link>)}
       </div>
-      <Link href={`/book/${bookId}?type=online_exam`} className="mt-6 flex min-h-16 items-center gap-3 rounded-2xl bg-emerald-500 px-5 font-black text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={24} /> بعد از تمرین، آزمون آنلاین کل کتاب را بده <ChevronLeft className="mr-auto" /></Link>
+      <Link href={`/book/${bookId}?type=online_exam`} className="mt-4 flex min-h-16 items-center gap-3 rounded-2xl bg-emerald-500 px-5 font-black text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={24} /> بعد از تمرین، آزمون آنلاین کل کتاب را بده <ChevronLeft className="mr-auto" /></Link>
     </section>
   );
 }
@@ -171,7 +171,7 @@ function SampleQuestionChapter({ chapterNumber, bookId, items, chapters, section
   return (
     <section className="rounded-3xl border border-orange-100 bg-orange-50/40 p-5 sm:p-7">
       <Header icon={FileQuestion} title={`نمونه‌سؤالات فصل ${toPersian(chapterIndex + 1)}`} text={chapterTitle} />
-      <div className="mt-7 space-y-3">{chapterItems.length > 0 ? chapterItems.map((item, index) => <SampleQuestionCard key={item.id} item={item} index={index + 1} />) : <div className="rounded-2xl border border-dashed border-orange-200 bg-white/70 p-8 text-center"><FileText className="mx-auto mb-3 text-orange-400" size={34} /><strong className="block text-slate-700">هنوز نمونه‌سؤالی برای این فصل منتشر نشده است.</strong><p className="mt-2 text-xs text-slate-400">فایل‌های PDF تأییدشده پس از انتشار در همین قسمت قرار می‌گیرند.</p></div>}</div>
+      <div className="mt-5 space-y-3">{chapterItems.length > 0 ? chapterItems.map((item, index) => <SampleQuestionCard key={item.id} item={item} index={index + 1} />) : <div className="rounded-2xl border border-dashed border-orange-200 bg-white/70 p-8 text-center"><FileText className="mx-auto mb-3 text-orange-400" size={34} /><strong className="block text-slate-700">هنوز نمونه‌سؤالی برای این فصل منتشر نشده است.</strong><p className="mt-2 text-xs text-slate-400">فایل‌های PDF تأییدشده پس از انتشار در همین قسمت قرار می‌گیرند.</p></div>}</div>
     </section>
   );
 }
@@ -188,7 +188,7 @@ function SampleQuestionCard({ item, index }: { item: ContentItem; index: number 
 }
 
 function PublishedItems({ items, bookId, type }: { items: ContentItem[]; bookId: number; type: string }) {
-  return <section className="rounded-3xl border border-slate-100 bg-white p-5 sm:p-7"><Header icon={type === 'teaching' ? PlayCircle : FileQuestion} title={type === 'teaching' ? 'تدریس‌های ریاضی پنجم' : 'تمرین‌ها و نمونه‌سؤالات'} /><div className="mt-6 space-y-3">{items.map((item, index) => <ContentItemCard key={item.id} item={item} bookId={bookId} index={index + 1} type={type} />)}</div></section>;
+  return <section className="rounded-3xl border border-slate-100 bg-white p-5 sm:p-7"><Header icon={type === 'teaching' ? PlayCircle : FileQuestion} title={type === 'teaching' ? 'تدریس‌های ریاضی پنجم' : 'تمرین‌ها و نمونه‌سؤالات'} /><div className="mt-4 space-y-3">{items.map((item, index) => <ContentItemCard key={item.id} item={item} bookId={bookId} index={index + 1} type={type} />)}</div></section>;
 }
 
 function SectionContentRow({ item, bookId, chapterId }: { item: ContentItem; bookId: number; chapterId: number }) {
@@ -224,9 +224,9 @@ function ContentDetail({ item, backHref, purchaseHref }: { item: ContentItem; ba
   }, [item.id, item.has_access]);
   return (
     <section className="rounded-3xl border border-orange-100 bg-[#fffaf3] p-5 shadow-[0_18px_55px_rgba(249,115,22,0.08)] sm:p-8">
-      <Link href={backHref} className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-orange-600"><ArrowRight size={18} /> بازگشت به بخش</Link>
-      <div className="mb-6 flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600"><CirclePlay size={28} /></span><h1 className="text-lg font-black text-slate-900 sm:text-xl">{item.title}{pageLabel && <span> {pageLabel}</span>}</h1><span className={`mr-auto rounded-full px-3 py-1 text-xs font-bold ${item.is_free ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>{item.is_free ? 'رایگان' : 'پولی'}</span></div>
-      {item.description && <p className="mb-6 rounded-2xl bg-white p-4 text-sm leading-7 text-slate-600">{item.description}</p>}
+      <Link href={backHref} className="mb-4 inline-flex items-center gap-2 text-sm font-bold text-orange-600"><ArrowRight size={18} /> بازگشت به بخش</Link>
+      <div className="mb-4 flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-600"><CirclePlay size={28} /></span><h1 className="text-lg font-black text-slate-900 sm:text-lg">{item.title}{pageLabel && <span> {pageLabel}</span>}</h1><span className={`mr-auto rounded-full px-3 py-1 text-xs font-bold ${item.is_free ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>{item.is_free ? 'رایگان' : 'پولی'}</span></div>
+      {item.description && <p className="mb-4 rounded-2xl bg-white p-4 text-sm leading-7 text-slate-600">{item.description}</p>}
       {item.has_access ? <ContentPlayer item={item} resumePosition={resumePosition} onProgress={(seconds) => getToken() ? saveContentProgress(item.id, { watch_seconds: seconds, last_position_seconds: seconds }).catch(() => undefined) : undefined} onCompleted={() => getToken() ? saveContentProgress(item.id, { completed: true, last_position_seconds: 0 }).catch(() => undefined) : undefined} /> : <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center"><LockKeyhole className="mx-auto mb-3 text-amber-600" /><p className="mb-4 text-sm text-amber-800">برای مشاهده این محتوا، دسترسی پایه را تهیه کنید.</p><Link href={purchaseHref} className="inline-flex rounded-xl bg-violet-700 px-6 py-3 font-bold text-white">مشاهده پلن‌های خرید</Link></div>}
     </section>
   );
@@ -269,7 +269,7 @@ function ContentPlayer({ item, resumePosition, onProgress, onCompleted }: { item
 }
 
 function Header({ icon: Icon, eyebrow, title, text }: { icon: typeof Layers3; eyebrow?: string; title: string; text?: string }) {
-  return <div className="flex items-start gap-4"><span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 shadow-sm"><Icon size={27} /></span><div>{eyebrow && <span className="text-xs font-black text-orange-600">{eyebrow}</span>}<h2 className={`${eyebrow ? 'mt-1' : ''} text-lg font-black text-slate-900 sm:text-xl`}>{title}</h2>{text && <p className="mt-2 text-sm leading-7 text-slate-500">{text}</p>}</div></div>;
+  return <div className="flex items-start gap-4"><span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 shadow-sm"><Icon size={27} /></span><div>{eyebrow && <span className="text-xs font-black text-orange-600">{eyebrow}</span>}<h2 className={`${eyebrow ? 'mt-1' : ''} text-lg font-black text-slate-900 sm:text-lg`}>{title}</h2>{text && <p className="mt-2 text-sm leading-7 text-slate-500">{text}</p>}</div></div>;
 }
 
 function toPersian(value: number) {

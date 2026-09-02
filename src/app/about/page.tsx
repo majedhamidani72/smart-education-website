@@ -2,10 +2,10 @@ import BackLink from '@/components/BackLink';
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-14">
+    <div className="mx-auto max-w-2xl px-4 py-10">
       <BackLink href="/">بازگشت</BackLink>
 
-      <h1 className="mb-6 text-xl font-extrabold text-gray-900">
+      <h1 className="mb-4 text-lg font-extrabold text-gray-900">
         درباره‌ی درسکا
       </h1>
 

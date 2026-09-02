@@ -21,12 +21,12 @@ export default function QuizSummarySection({
 }) {
   if (summary.book.length === 0) {
     return (
-      <section className="mb-10 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
+      <section className="mb-8 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
         <div className="flex items-center gap-3">
           <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={25} /></span>
           <div><h2 className="font-black text-gray-900">آزمون آنلاین کل کتاب</h2><p className="text-xs text-gray-500">آزمون جامع کتاب پس از انتشار در این قسمت فعال می‌شود.</p></div>
         </div>
-        <div className="mt-6">
+        <div className="mt-4">
           <div className="rounded-2xl border border-emerald-100 bg-white p-5"><span className="text-lg">🏆</span><strong className="mt-3 block text-sm text-slate-800">آزمون جامع کل کتاب</strong><span className="mt-1 block text-[10px] text-slate-400">به‌زودی فعال می‌شود</span></div>
         </div>
       </section>
@@ -34,8 +34,8 @@ export default function QuizSummarySection({
   }
 
   return (
-    <section className="mb-10 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
-      <div className="mb-6 flex items-center gap-3">
+    <section className="mb-8 rounded-3xl border border-emerald-100 bg-gradient-to-b from-emerald-50/70 to-white p-5 shadow-[0_10px_35px_rgba(16,185,129,0.06)] sm:p-6">
+      <div className="mb-4 flex items-center gap-3">
         <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-100"><ClipboardCheck size={25} /></span>
         <div>
           <h2 className="font-black text-gray-900">آزمون آنلاین کل کتاب</h2>

@@ -70,7 +70,7 @@ export default function AdvertisementSlot({ position }: { position: Advertisemen
       <button type="button" onClick={close} aria-label="بستن تبلیغ" className="absolute left-2.5 top-2.5 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-white text-slate-700 shadow-lg transition hover:bg-rose-50 hover:text-rose-600"><X size={15} /></button>
       <button type="button" onClick={openDestination} className="group relative block h-full w-full text-right">
         <img src={ad.image} alt={ad.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent px-3 pb-3 pt-10 text-white sm:px-4 sm:pb-4">
+        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent px-3 pb-3 pt-8 text-white sm:px-4 sm:pb-4">
           <strong className="line-clamp-2 block text-xs leading-5 sm:text-sm">{ad.title}</strong>
           {ad.link && <span className="mt-1.5 inline-flex items-center gap-1 text-[9px] font-bold text-white/80 sm:text-[10px]">مشاهده <ExternalLink size={11} /></span>}
         </span>

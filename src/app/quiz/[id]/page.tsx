@@ -124,7 +124,7 @@ export default function QuizPage() {
 
   if (phase.name === 'loading' || phase.name === 'submitting') {
     return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-center text-gray-500">
+      <div className="mx-auto max-w-lg px-4 py-12 text-center text-gray-500">
         {phase.name === 'loading' ? 'در حال بارگذاری آزمون...' : 'در حال ثبت پاسخ‌ها...'}
       </div>
     );
@@ -132,21 +132,21 @@ export default function QuizPage() {
 
   if (phase.name === 'needs-purchase') {
     return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-center">
+      <div className="mx-auto max-w-lg px-4 py-12 text-center">
         <BackLink href="/">بازگشت</BackLink>
-        <div className="mb-3 text-3xl">🔒</div>
+        <div className="mb-3 text-2xl">🔒</div>
         <h1 className="mb-2 text-base font-bold text-gray-900">نیاز به خرید</h1>
         <p className="text-sm text-gray-500">{phase.message}</p>
-        {bookId && <Link href={`/purchase?book_id=${bookId}&return_to=${encodeURIComponent(`/quiz/${params.id}?book_id=${bookId}`)}`} className="mt-6 inline-flex rounded-xl bg-violet-700 px-6 py-3 text-sm font-bold text-white">مشاهده پلن‌های خرید</Link>}
+        {bookId && <Link href={`/purchase?book_id=${bookId}&return_to=${encodeURIComponent(`/quiz/${params.id}?book_id=${bookId}`)}`} className="mt-4 inline-flex rounded-xl bg-violet-700 px-6 py-3 text-sm font-bold text-white">مشاهده پلن‌های خرید</Link>}
       </div>
     );
   }
 
   if (phase.name === 'error') {
     return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-center">
+      <div className="mx-auto max-w-lg px-4 py-12 text-center">
         <BackLink href="/">بازگشت</BackLink>
-        <div className="mb-3 text-3xl">⚠️</div>
+        <div className="mb-3 text-2xl">⚠️</div>
         <p className="text-sm text-red-600">{phase.message}</p>
       </div>
     );
@@ -167,19 +167,19 @@ export default function QuizPage() {
   const optionLabels = ['الف', 'ب', 'ج', 'د', 'هـ', 'و'];
 
   return (
-    <main className="min-h-[calc(100vh-74px)] bg-gradient-to-b from-violet-50 via-white to-sky-50 px-4 py-7 sm:py-10">
+    <main className="min-h-[calc(100vh-74px)] bg-gradient-to-b from-violet-50 via-white to-sky-50 px-4 py-5 sm:py-8">
       <div className="mx-auto max-w-6xl">
         <header className="overflow-hidden rounded-[2rem] bg-gradient-to-l from-violet-700 via-indigo-700 to-blue-700 p-6 text-white shadow-[0_24px_70px_rgba(79,70,229,0.22)] sm:p-8">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20"><ClipboardCheck size={29} /></span><div><p className="text-xs font-bold text-violet-200">آزمون هوشمند درسکا</p><h1 className="mt-1 text-lg font-black sm:text-xl">{quiz.title}</h1></div></div><div className="flex gap-3"><span className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm"><CircleHelp size={18} /> {quiz.questions.length.toLocaleString('fa-IR')} سؤال</span><span dir="ltr" className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-sm font-black ${secondsLeft !== null && secondsLeft < 60 ? 'bg-red-500' : 'bg-white/10'}`}><AlarmClock size={18} /> {timerLabel}</span></div></div>
-          <div className="mt-6"><div className="mb-2 flex justify-between text-xs text-violet-100"><span>{answeredCount.toLocaleString('fa-IR')} پاسخ ثبت‌شده</span><span>{Math.round(progress).toLocaleString('fa-IR')}٪ پیشرفت</span></div><div className="h-2 overflow-hidden rounded-full bg-white/15"><div className="h-full rounded-full bg-gradient-to-l from-emerald-300 to-cyan-300 transition-all" style={{ width: `${progress}%` }} /></div></div>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-center gap-4"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20"><ClipboardCheck size={29} /></span><div><p className="text-xs font-bold text-violet-200">آزمون هوشمند درسکا</p><h1 className="mt-1 text-lg font-black sm:text-lg">{quiz.title}</h1></div></div><div className="flex gap-3"><span className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm"><CircleHelp size={18} /> {quiz.questions.length.toLocaleString('fa-IR')} سؤال</span><span dir="ltr" className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-sm font-black ${secondsLeft !== null && secondsLeft < 60 ? 'bg-red-500' : 'bg-white/10'}`}><AlarmClock size={18} /> {timerLabel}</span></div></div>
+          <div className="mt-4"><div className="mb-2 flex justify-between text-xs text-violet-100"><span>{answeredCount.toLocaleString('fa-IR')} پاسخ ثبت‌شده</span><span>{Math.round(progress).toLocaleString('fa-IR')}٪ پیشرفت</span></div><div className="h-2 overflow-hidden rounded-full bg-white/15"><div className="h-full rounded-full bg-gradient-to-l from-emerald-300 to-cyan-300 transition-all" style={{ width: `${progress}%` }} /></div></div>
         </header>
 
-        <div className="mt-6 grid gap-5 lg:grid-cols-[250px_1fr]">
+        <div className="mt-4 grid gap-5 lg:grid-cols-[250px_1fr]">
           <aside className="h-fit rounded-3xl border border-violet-100 bg-white p-5 shadow-sm"><div className="mb-4 flex items-center gap-2 font-black text-slate-800"><Flag size={19} className="text-violet-600" /> نقشه آزمون</div><div className="grid grid-cols-5 gap-2 lg:grid-cols-4">{quiz.questions.map((question, index) => <button key={question.id} onClick={() => setCurrentIndex(index)} className={`flex aspect-square items-center justify-center rounded-xl text-sm font-black transition ${currentIndex === index ? 'bg-violet-600 text-white shadow-lg shadow-violet-200' : answers[question.id] ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500 hover:bg-violet-50'}`}>{(index + 1).toLocaleString('fa-IR')}</button>)}</div><div className="mt-5 space-y-2 border-t border-slate-100 pt-4 text-xs text-slate-500"><p className="flex items-center gap-2"><span className="h-3 w-3 rounded bg-emerald-100" /> پاسخ داده‌شده</p><p className="flex items-center gap-2"><span className="h-3 w-3 rounded bg-slate-100" /> بدون پاسخ</p></div></aside>
 
           <section className="rounded-[2rem] border border-violet-100 bg-white p-5 shadow-[0_18px_60px_rgba(79,70,229,0.08)] sm:p-8">
-            {currentQuestion ? <><div className="mb-6 flex items-start gap-4"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-100 text-base font-black text-violet-700">{(currentIndex + 1).toLocaleString('fa-IR')}</span>{currentQuestion.question_text && <p className="pt-2 text-base font-black leading-8 text-slate-800 sm:text-base">{currentQuestion.question_text}</p>}</div>{currentQuestion.image_path && <img src={currentQuestion.image_path} alt="تصویر سؤال" className="mx-auto mb-6 max-h-96 max-w-full rounded-2xl border border-slate-100 bg-white object-contain p-2" />}<div className="grid gap-3 sm:grid-cols-2">{currentQuestion.options.map((option, optionIndex) => { const feedback = answerFeedback?.questionId === currentQuestion.id ? answerFeedback : null; const selected = feedback?.selectedId === option.id; const correct = feedback?.correctId === option.id; const stateClass = correct ? 'border-emerald-500 bg-emerald-50 text-emerald-900' : selected && !feedback?.isCorrect ? 'border-rose-500 bg-rose-50 text-rose-900' : selected ? 'border-violet-500 bg-violet-50 text-violet-900' : 'border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40'; return <button key={option.id} disabled={isAnswering || !!feedback} onClick={() => void handleOptionSelect(currentQuestion.id, option.id)} className={`flex min-h-16 items-center gap-3 rounded-2xl border p-4 text-right transition ${stateClass}`}><span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-black ${correct ? 'bg-emerald-600 text-white' : selected && !feedback?.isCorrect ? 'bg-rose-600 text-white' : selected ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-500'}`}>{optionLabels[optionIndex] ?? (optionIndex + 1).toLocaleString('fa-IR')}</span><span className="flex min-w-0 flex-1 flex-col gap-2 font-bold leading-7">{option.option_text && <span>{option.option_text}</span>}{option.image_path && <img src={option.image_path} alt={`تصویر گزینه ${optionLabels[optionIndex] ?? optionIndex + 1}`} className="max-h-44 max-w-full rounded-xl border border-slate-100 bg-white object-contain p-1" />}</span>{correct && <CheckCircle2 size={20} className="mr-auto shrink-0 text-emerald-600" />}{selected && !feedback?.isCorrect && <XCircle size={20} className="mr-auto shrink-0 text-rose-600" />}</button>; })}</div></> : <p className="py-12 text-center text-slate-500">سؤالی برای این آزمون پیدا نشد.</p>}
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-5"><button disabled={currentIndex === 0} onClick={() => setCurrentIndex((index) => Math.max(0, index - 1))} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-bold text-slate-600 disabled:opacity-35"><ArrowRight size={18} /> سؤال قبلی</button>{currentIndex < quiz.questions.length - 1 ? <button onClick={() => setCurrentIndex((index) => Math.min(quiz.questions.length - 1, index + 1))} className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-violet-100">سؤال بعدی <ArrowLeft size={18} /></button> : <button onClick={handleFinish} className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-100"><ShieldCheck size={18} /> پایان آزمون و مشاهده نتیجه</button>}</div>
+            {currentQuestion ? <><div className="mb-4 flex items-start gap-4"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-100 text-base font-black text-violet-700">{(currentIndex + 1).toLocaleString('fa-IR')}</span>{currentQuestion.question_text && <p className="pt-2 text-base font-black leading-8 text-slate-800 sm:text-base">{currentQuestion.question_text}</p>}</div>{currentQuestion.image_path && <img src={currentQuestion.image_path} alt="تصویر سؤال" className="mx-auto mb-4 max-h-96 max-w-full rounded-2xl border border-slate-100 bg-white object-contain p-2" />}<div className="grid gap-3 sm:grid-cols-2">{currentQuestion.options.map((option, optionIndex) => { const feedback = answerFeedback?.questionId === currentQuestion.id ? answerFeedback : null; const selected = feedback?.selectedId === option.id; const correct = feedback?.correctId === option.id; const stateClass = correct ? 'border-emerald-500 bg-emerald-50 text-emerald-900' : selected && !feedback?.isCorrect ? 'border-rose-500 bg-rose-50 text-rose-900' : selected ? 'border-violet-500 bg-violet-50 text-violet-900' : 'border-slate-200 text-slate-700 hover:border-violet-300 hover:bg-violet-50/40'; return <button key={option.id} disabled={isAnswering || !!feedback} onClick={() => void handleOptionSelect(currentQuestion.id, option.id)} className={`flex min-h-16 items-center gap-3 rounded-2xl border p-4 text-right transition ${stateClass}`}><span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-black ${correct ? 'bg-emerald-600 text-white' : selected && !feedback?.isCorrect ? 'bg-rose-600 text-white' : selected ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-500'}`}>{optionLabels[optionIndex] ?? (optionIndex + 1).toLocaleString('fa-IR')}</span><span className="flex min-w-0 flex-1 flex-col gap-2 font-bold leading-7">{option.option_text && <span>{option.option_text}</span>}{option.image_path && <img src={option.image_path} alt={`تصویر گزینه ${optionLabels[optionIndex] ?? optionIndex + 1}`} className="max-h-44 max-w-full rounded-xl border border-slate-100 bg-white object-contain p-1" />}</span>{correct && <CheckCircle2 size={20} className="mr-auto shrink-0 text-emerald-600" />}{selected && !feedback?.isCorrect && <XCircle size={20} className="mr-auto shrink-0 text-rose-600" />}</button>; })}</div></> : <p className="py-9 text-center text-slate-500">سؤالی برای این آزمون پیدا نشد.</p>}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-5"><button disabled={currentIndex === 0} onClick={() => setCurrentIndex((index) => Math.max(0, index - 1))} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-bold text-slate-600 disabled:opacity-35"><ArrowRight size={18} /> سؤال قبلی</button>{currentIndex < quiz.questions.length - 1 ? <button onClick={() => setCurrentIndex((index) => Math.min(quiz.questions.length - 1, index + 1))} className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-violet-100">سؤال بعدی <ArrowLeft size={18} /></button> : <button onClick={handleFinish} className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-100"><ShieldCheck size={18} /> پایان آزمون و مشاهده نتیجه</button>}</div>
           </section>
         </div>
       </div>
@@ -201,13 +201,13 @@ function ResultView({ result, bookId }: { result: QuizResult; bookId: number | n
   const face = faces[assessment.tone as keyof typeof faces] ?? '🙂';
 
   return (
-    <main className="min-h-[calc(100vh-74px)] bg-slate-50 px-4 py-7 text-slate-800 sm:py-10">
+    <main className="min-h-[calc(100vh-74px)] bg-slate-50 px-4 py-5 text-slate-800 sm:py-8">
       <div className="mx-auto max-w-4xl">
         <section className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm sm:p-8">
           <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-right">
-            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-4xl">{face}</span>
-            <div className="flex-1"><p className="text-xs font-bold text-emerald-600">نتیجه آزمون</p><h1 className="mt-1 text-xl font-black text-slate-900">{assessment.label}</h1><p className="mt-2 text-sm leading-7 text-slate-500">{assessment.message}</p></div>
-            <div className="border-t border-slate-100 pt-4 text-center sm:border-r sm:border-t-0 sm:pr-7 sm:pt-0"><strong className="block text-3xl font-black text-teal-700">{percentage.toLocaleString('fa-IR')}٪</strong><span className="mt-1 block text-xs text-slate-400">{result.score.earned.toLocaleString('fa-IR')} از {result.score.total.toLocaleString('fa-IR')} امتیاز</span></div>
+            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-3xl">{face}</span>
+            <div className="flex-1"><p className="text-xs font-bold text-emerald-600">نتیجه آزمون</p><h1 className="mt-1 text-lg font-black text-slate-900">{assessment.label}</h1><p className="mt-2 text-sm leading-7 text-slate-500">{assessment.message}</p></div>
+            <div className="border-t border-slate-100 pt-4 text-center sm:border-r sm:border-t-0 sm:pr-7 sm:pt-0"><strong className="block text-2xl font-black text-teal-700">{percentage.toLocaleString('fa-IR')}٪</strong><span className="mt-1 block text-xs text-slate-400">{result.score.earned.toLocaleString('fa-IR')} از {result.score.total.toLocaleString('fa-IR')} امتیاز</span></div>
           </div>
         </section>
 

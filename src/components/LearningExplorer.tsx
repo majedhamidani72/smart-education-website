@@ -66,10 +66,10 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
   };
 
   return (
-    <section id="learning-explorer" className="grade-pattern darska-watermark scroll-mt-20 px-4 pb-10 pt-5 sm:pb-12 sm:pt-7">
+    <section id="learning-explorer" className="grade-pattern darska-watermark scroll-mt-20 px-4 pb-8 pt-5 sm:pb-9 sm:pt-5">
       <div className="mx-auto max-w-[1480px]">
         <div className="text-center">
-          <h2 className="text-2xl font-black text-[#242238] sm:text-3xl">پایه تحصیلی خودت را انتخاب کن</h2>
+          <h2 className="text-xl font-black text-[#242238] sm:text-2xl">پایه تحصیلی خودت را انتخاب کن</h2>
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -89,13 +89,13 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
           })}
         </div>
 
-        {active && <div id="grade-learning-content" ref={learningContentRef} className="mt-7 scroll-mt-24">
+        {active && <div id="grade-learning-content" ref={learningContentRef} className="mt-5 scroll-mt-24">
           {active.books.length > 0 && (
             <div className="mb-5 rounded-[2rem] border border-blue-100 bg-white/90 p-5 shadow-[0_14px_40px_rgba(37,99,235,0.08)] backdrop-blur sm:p-6">
               <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <span className="text-xs font-black text-blue-600">کتاب‌های پایه {active.grade.title}</span>
-                  <h3 className="mt-1 text-lg font-black text-slate-900 sm:text-xl">کتاب موردنظرت را انتخاب کن</h3>
+                  <h3 className="mt-1 text-lg font-black text-slate-900 sm:text-lg">کتاب موردنظرت را انتخاب کن</h3>
                 </div>
                 <p className="text-sm text-slate-500">کتاب‌های فارسی، ریاضی و سایر کتاب‌های ثبت‌شده این پایه</p>
               </div>
@@ -127,10 +127,10 @@ export default function LearningExplorer({ options }: { options: GradeLearningOp
 
           <div>
           <div className="rounded-[2rem] border border-orange-100 bg-gradient-to-l from-orange-50 via-white to-amber-50 p-6 shadow-[0_15px_45px_rgba(249,115,22,0.09)] sm:p-8">
-            <div className="flex flex-col gap-7 xl:flex-row xl:items-center xl:justify-between">
+            <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
               <div className="flex items-center gap-4">
                 <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-orange-500 text-white shadow-lg shadow-orange-100"><Calculator size={40} /></span>
-                <div><h3 className="text-xl font-black text-slate-900 sm:text-2xl">{activeBook ? `${activeBook.book.title} ${active.grade.title}` : `کتاب‌های پایه ${active.grade.title}`}</h3></div>
+                <div><h3 className="text-lg font-black text-slate-900 sm:text-xl">{activeBook ? `${activeBook.book.title} ${active.grade.title}` : `کتاب‌های پایه ${active.grade.title}`}</h3></div>
               </div>
 
               {activeBook ? (
@@ -176,7 +176,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
 
   if (mode === 'online_exam') {
     return (
-      <div className="mt-7 border-t border-orange-100 pt-7">
+      <div className="mt-5 border-t border-orange-100 pt-5">
         <Link href={`/book/${book.id}?type=online_exam&grade_id=${grade.id}`} className="group flex min-h-24 items-center gap-4 rounded-2xl border border-emerald-100 bg-emerald-50 p-5 transition hover:-translate-y-1 hover:shadow-md"><span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500 text-white"><ClipboardCheck size={28} /></span><span><small className="text-sm font-bold text-emerald-600">جمع‌بندی نهایی</small><strong className="mt-1 block text-lg text-slate-900">آزمون آنلاین کل کتاب</strong><span className="mt-1 block text-sm text-slate-500">همه فصل‌های {book.title}</span></span><ChevronLeft className="mr-auto text-emerald-500 transition group-hover:-translate-x-1" /></Link>
       </div>
     );
@@ -187,7 +187,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
 
   if (!teaching) {
     return (
-      <div className="mt-7 space-y-3 border-t border-orange-100 pt-7">
+      <div className="mt-5 space-y-3 border-t border-orange-100 pt-5">
         {chapters.map((chapter, index) => (
           <Link key={chapter.id} href={`/book/${book.id}?type=${mode}&chapter=${chapter.id}&grade_id=${grade.id}`} className="group flex min-h-20 items-center gap-4 rounded-2xl border border-orange-100 bg-white p-4 transition hover:border-orange-300 hover:shadow-md">
             <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 font-black text-orange-600">{toPersian(index + 1)}</span>
@@ -200,7 +200,7 @@ function InlineLearningPanel({ mode, book, grade, chapters: apiChapters, section
   }
 
   return (
-    <div className="mt-7 border-t border-orange-100 pt-7">
+    <div className="mt-5 border-t border-orange-100 pt-5">
       <div className="space-y-3">
         {isMath ? chapters.map((chapter, chapterIndex) => {
           const chapterSections = sections.filter((section) => section.chapter_id === chapter.id);
