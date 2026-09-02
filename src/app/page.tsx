@@ -111,7 +111,7 @@ export default async function Home() {
       <section className="hero-pattern relative px-4 pb-5 pt-3 sm:pb-6 sm:pt-4">
         <div className="relative mx-auto grid max-w-[1480px] items-center gap-3 lg:grid-cols-2 lg:gap-4">
           <div className="text-center lg:text-right">
-            <h1 className="text-xl font-black leading-[1.35] text-[#171526] sm:text-2xl lg:whitespace-nowrap lg:text-[2.25rem] xl:text-[2.5rem]">یادگیری آسان، موفقیت برای همیشه</h1>
+            <h1 className="text-xl font-black leading-[1.35] text-[#171526] sm:text-2xl lg:whitespace-nowrap">یادگیری آسان، موفقیت برای همیشه</h1>
             <div className="mt-4 flex flex-col justify-center gap-2.5 sm:flex-row lg:justify-start">
               <Link href="#learning-explorer" className="button-outline group"><BookOpen size={20} />شروع یادگیری<ArrowLeft size={17} className="transition group-hover:-translate-x-1" /></Link>
               <Link href="#powerpoint-showcase" className="button-primary group"><Presentation size={20} />پاورپوینت تدریس<ArrowLeft size={17} className="transition group-hover:-translate-x-1" /></Link>
