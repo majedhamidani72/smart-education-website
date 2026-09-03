@@ -1,27 +1,22 @@
 import { Powerpoint } from '@/lib/powerpoints';
 
-/** درصد تخفیفِ واقعی را مستقل از فیلد discount_percent سرور حساب می‌کند. */
-export function getDiscountPercent(item: Powerpoint): number {
-  if (item.price <= item.final_price) return 0;
-  return item.discount_percent > 0
-    ? item.discount_percent
-    : Math.round(((item.price - item.final_price) / item.price) * 100);
-}
-
-/** روبان «٪X تخفیف» که روی تصویر کارت/جلد پاورپوینت قرار می‌گیرد. */
+/** روبان «٪X تخفیف» که روی تصویر کارت/جلد پاورپوینت قرار می‌گیرد — کاملاً بر پایه‌ی discount_percentِ بک‌اند. */
 export function DiscountRibbon({ item, className }: { item: Powerpoint; className: string }) {
-  const percent = getDiscountPercent(item);
-  if (percent <= 0) return null;
-  return <span className={className}>{percent.toLocaleString('fa-IR')}٪ تخفیف</span>;
+  if (item.discount_percent <= 0) return null;
+  return <span className={className}>{item.discount_percent.toLocaleString('fa-IR')}٪ تخفیف</span>;
 }
 
 /**
  * نمایش قیمتِ یک پاورپوینت.
  * --------------------------------------------------------------------
- * اگر قیمت نهایی صفر باشد (چه با قیمت اصلیِ صفر، چه با ۱۰۰٪ تخفیف)،
- * به‌جای «۰ تومان» عبارت «رایگان» نشان داده می‌شود. اگر تخفیفی در کار
- * باشد، قیمت اصلی با خط‌خورده و درصد تخفیف داخل پرانتز کنارش می‌آید —
- * مثلاً: «۴۵,۰۰۰ تومان (٪۱۰۰) رایگان».
+ * تمام محاسبات (قیمت نهایی، درصد تخفیف) از بک‌اند می‌آید؛ این کامپوننت
+ * فقط همان مقادیر را نمایش می‌دهد و هیچ محاسبه‌ای خودش انجام نمی‌دهد —
+ * چون همین بک‌اند قرار است پایه‌ی اپ موبایل هم باشد و منطق قیمت‌گذاری
+ * باید فقط در یک جا (سرور) وجود داشته باشد.
+ *
+ * اگر final_price صفر باشد، به‌جای «۰ تومان» «رایگان» نشان داده می‌شود.
+ * اگر discount_percent بزرگ‌تر از صفر باشد، قیمت اصلی خط‌خورده و درصد
+ * تخفیف داخل پرانتز کنارش می‌آید — مثلاً: «۴۵,۰۰۰ تومان (٪۱۰۰) رایگان».
  */
 export default function PowerpointPrice({
   item,
@@ -33,16 +28,14 @@ export default function PowerpointPrice({
   originalPriceClassName?: string;
 }) {
   const isFree = item.final_price === 0;
-  const percent = getDiscountPercent(item);
-  const hasDiscount = percent > 0;
 
   return (
     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-      {hasDiscount && (
+      {item.discount_percent > 0 && (
         <span className={originalPriceClassName}>
           <del>{item.price.toLocaleString('fa-IR')} تومان</del>
           {' '}
-          (٪{percent.toLocaleString('fa-IR')})
+          (٪{item.discount_percent.toLocaleString('fa-IR')})
         </span>
       )}
       <strong className={finalPriceClassName}>
