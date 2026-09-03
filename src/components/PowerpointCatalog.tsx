@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, Download, FileSliders, GraduationCap, Layers3 } from 'lucide-react';
 import { downloadPowerpoint, getPowerpoints, Powerpoint } from '@/lib/powerpoints';
 import PowerpointPrice from '@/components/PowerpointPrice';
+import { DiscountRibbon } from '@/components/PowerpointPrice';
 
 export default function PowerpointCatalog() {
   const [items, setItems] = useState<Powerpoint[]>([]);
@@ -60,7 +61,7 @@ export default function PowerpointCatalog() {
               <Link href={`/powerpoints/${item.id}`} className="block">
                 <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-orange-100 to-indigo-100">
                   {item.preview_image ? <Image src={item.preview_image} alt={`جلد ${item.title}`} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" /> : <FileSliders className="absolute inset-0 m-auto text-indigo-400" size={62} />}
-                  {item.discount_percent > 0 && <span className="absolute right-3 top-3 rounded-full bg-rose-500 px-3 py-1 text-xs font-black text-white">{item.discount_percent.toLocaleString('fa-IR')}٪ تخفیف</span>}
+                  <DiscountRibbon item={item} className="absolute right-3 top-3 rounded-full bg-rose-500 px-3 py-1 text-xs font-black text-white" />
                   {item.is_featured && <span className="absolute left-3 top-3 rounded-full bg-indigo-700 px-3 py-1 text-xs font-black text-white">منتخب</span>}
                   {item.has_preview && <span className="absolute bottom-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-slate-800 backdrop-blur">دارای نمونه PDF</span>}
                 </div>
