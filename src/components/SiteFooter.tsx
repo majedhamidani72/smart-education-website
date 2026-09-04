@@ -26,6 +26,12 @@ export default function SiteFooter() {
             تماس با ما
           </Link>
           <Link
+            href="/purchase-guide"
+            className="text-sm text-gray-500 transition hover:text-orange-600"
+          >
+            راهنمای خرید
+          </Link>
+          <Link
             href="/rules"
             className="text-sm text-gray-500 transition hover:text-orange-600"
           >
