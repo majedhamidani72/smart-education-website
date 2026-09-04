@@ -12,7 +12,7 @@ export default function SiteFooter() {
           درسکا
         </div>
 
-        <nav className="flex items-center gap-4">
+        <nav className="flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/about"
             className="text-sm text-gray-500 transition hover:text-orange-600"
@@ -24,6 +24,18 @@ export default function SiteFooter() {
             className="text-sm text-gray-500 transition hover:text-orange-600"
           >
             تماس با ما
+          </Link>
+          <Link
+            href="/rules"
+            className="text-sm text-gray-500 transition hover:text-orange-600"
+          >
+            قوانین و مقررات
+          </Link>
+          <Link
+            href="/privacy"
+            className="text-sm text-gray-500 transition hover:text-orange-600"
+          >
+            حریم خصوصی
           </Link>
         </nav>
       </div>
